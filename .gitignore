@@ -1,0 +1,12 @@
+/*.exe
+/*.pdb
+Thumbs.db
+/Grapht.userprefs
+/*_Data
+/obj/Debug
+/Library
+/Temp
+/Grapht.v12.suo
+/Grapht.CSharp.csproj
+/Grapht.sln
+/.vs
