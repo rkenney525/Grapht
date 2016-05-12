@@ -5,6 +5,7 @@ public class TreeNodeScript : MonoBehaviour {
     private IList<TreeNodeScript> nodes = new List<TreeNodeScript>();
 
     private const float LINE_WIDTH = 0.125f;
+    private const float LINE_DISTANCE = 5;
 
     public TreeNodeScript ParentNode { get; private set; }
 
@@ -33,6 +34,7 @@ public class TreeNodeScript : MonoBehaviour {
             this.joint = this.gameObject.AddComponent<DistanceJoint2D>();
         }
         this.joint.connectedBody = this.ParentNode.GetComponent<Rigidbody2D>();
+        this.joint.distance = LINE_DISTANCE;
         this.UpdateLine();
     }
 
