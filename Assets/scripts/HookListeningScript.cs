@@ -12,7 +12,13 @@ public class HookListeningScript : MonoBehaviour {
         this.node = this.GetComponent<TreeNodeScript>();
     }
 
-    public void MakeConnection(TreeNodeScript node) {
+    public TreeNodeScript MakeConnection(TreeNodeScript node) {
+        TreeNodeScript old = this.connectingNode;
+        this.connectingNode = node;
+        return old;
+    }
+
+    public void ReleaseConnection(TreeNodeScript node) {
         this.connectingNode = node;
     }
 

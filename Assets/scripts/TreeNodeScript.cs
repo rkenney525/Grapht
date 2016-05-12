@@ -18,7 +18,9 @@ public class TreeNodeScript : MonoBehaviour {
             this.ParentNode.LoseChild(this);
         }
         this.ParentNode = parentNode;
-        this.joint = this.gameObject.AddComponent<DistanceJoint2D>();
+        if (this.joint == null) {
+            this.joint = this.gameObject.AddComponent<DistanceJoint2D>();
+        }
         this.joint.connectedBody = this.ParentNode.GetComponent<Rigidbody2D>();
     }
 
