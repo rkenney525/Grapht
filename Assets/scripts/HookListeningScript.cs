@@ -1,0 +1,28 @@
+﻿using UnityEngine;
+using System.Collections;
+
+[RequireComponent(typeof(TreeNodeScript))]
+public class HookListeningScript : MonoBehaviour {
+
+    private TreeNodeScript node;
+
+    private TreeNodeScript connectingNode;
+
+    void Start() {
+        this.node = this.GetComponent<TreeNodeScript>();
+    }
+
+    public void MakeConnection(TreeNodeScript node) {
+        this.connectingNode = node;
+    }
+
+    public void BeginListening() {
+        this.connectingNode = this.node.ParentNode;
+    }
+
+    public void EndAndConnect() {
+        if (this.connectingNode != null) {
+            this.node.AddNewChild(this.connectingNode);
+        }
+    }
+}
