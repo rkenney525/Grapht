@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 public class TreeNodeScript : MonoBehaviour {
     private IList<TreeNodeScript> nodes = new List<TreeNodeScript>();
 
@@ -11,7 +12,7 @@ public class TreeNodeScript : MonoBehaviour {
 
     private LineRenderer parentLine;
 
-    private DistanceJoint2D joint;
+    private RelativeJoint2D joint;
 
     void Update() {
         if (this.parentLine != null) {
@@ -31,11 +32,18 @@ public class TreeNodeScript : MonoBehaviour {
         }
         this.ParentNode = parentNode;
         if (this.joint == null) {
-            this.joint = this.gameObject.AddComponent<DistanceJoint2D>();
+            this.joint = this.gameObject.AddComponent<RelativeJoint2D>();
         }
         this.joint.connectedBody = this.ParentNode.GetComponent<Rigidbody2D>();
-        this.joint.distance = LINE_DISTANCE;
+        this.joint.linearOffset = this.ParentNode.GetChildOffset();
         this.UpdateLine();
+    }
+
+    public Vector2 GetChildOffset() {
+        // TODO make this more dynamic
+        float xVal = -((float) Math.Cos(Math.PI * 1.25) * LINE_DISTANCE);
+        float yVal = -((float) Math.Sin(Math.PI * 1.25) * LINE_DISTANCE);
+        return new Vector2(xVal, yVal);
     }
 
     private void UpdateLine() {
