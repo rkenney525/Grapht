@@ -15,8 +15,8 @@ public class TreeNodeScript : MonoBehaviour {
 
     void Update() {
         if (this.parentLine != null) {
-        this.parentLine.SetPosition(0, this.transform.position);
-        this.parentLine.SetPosition(1, this.joint.connectedBody.position);
+            this.parentLine.SetPosition(0, this.transform.position);
+            this.parentLine.SetPosition(1, this.joint.connectedBody.position);
         }
     }
 
