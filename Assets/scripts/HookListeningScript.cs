@@ -24,6 +24,7 @@ public class HookListeningScript : MonoBehaviour {
 
     public void BeginListening() {
         this.connectingNode = this.node.ParentNode;
+        this.node.Detach();
     }
 
     public void EndAndConnect() {

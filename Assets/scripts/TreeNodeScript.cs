@@ -35,6 +35,10 @@ public class TreeNodeScript : MonoBehaviour {
         childNode.ChangeParent(this);
     }
 
+    public void Detach() {
+        this.ChangeParent(null);
+    }
+
     public void ChangeParent(TreeNodeScript parentNode) {
         // Tell previous parent
         if (this.ParentNode != null) {
