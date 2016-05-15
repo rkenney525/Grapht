@@ -29,6 +29,7 @@ public class HookListeningScript : MonoBehaviour {
     public void EndAndConnect() {
         if (this.connectingNode != null) {
             this.connectingNode.AddNewChild(this.node);
+            this.connectingNode = null;
         }
     }
 }

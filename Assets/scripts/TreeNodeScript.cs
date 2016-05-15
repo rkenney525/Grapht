@@ -46,7 +46,7 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     public void LoseChild(TreeNodeScript childNode) {
-        // TODO remove Binding from GameObject
+        Destroy(this.children[childNode].gameObject);
         this.children.Remove(childNode);
         this.SetChildAngles();
     }
@@ -58,11 +58,11 @@ public class TreeNodeScript : MonoBehaviour {
     private void SetChildAngles() {
         // TODO sort the list
         Binding[] bindings = this.children.Values.ToArray<Binding>();
-        float space = CHILD_WIDTH / (float) (bindings.Length + 1);
+        float space = CHILD_WIDTH / (float)(bindings.Length + 1);
         float start = -CHILD_WIDTH / 2;
         Vector2 angle;
         for (int i = 0; i < bindings.Length; i++) {
-            float x = start + (((float) i + 1) * space);
+            float x = start + (((float)i + 1) * space);
             angle = new Vector2(x, -LINE_HEIGHT);
             bindings[i].UpdateAngle(angle);
         }
