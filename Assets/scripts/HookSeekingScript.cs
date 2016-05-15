@@ -7,8 +7,9 @@ public class HookSeekingScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         HookListeningScript hooker = this.HookerFromCollider2D(other);
-        if (hooker != null) {
-            hooker.MakeConnection(this.GetComponentInParent<TreeNodeScript>());
+        TreeNodeScript parentNode = this.GetComponentInParent<TreeNodeScript>();
+        if (hooker != null && parentNode.CanAcceptConnection()) {
+            this.replacement = hooker.MakeConnection(parentNode);
         }
     }
 
