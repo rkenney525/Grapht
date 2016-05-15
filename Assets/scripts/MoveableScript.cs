@@ -2,19 +2,19 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(HookListeningScript))]
+[RequireComponent(typeof(HookChildScript))]
 public class MoveableScript : MonoBehaviour {
 
     private bool selected;
 
     private Rigidbody2D rigidBody;
 
-    private HookListeningScript hooker;
+    private HookChildScript hooker;
 
 	void Start () {
         this.selected = false;
         this.rigidBody = this.GetComponent<Rigidbody2D>();
-        this.hooker = this.GetComponent<HookListeningScript>();
+        this.hooker = this.GetComponent<HookChildScript>();
 	}
 	
 	// Update is called once per frame

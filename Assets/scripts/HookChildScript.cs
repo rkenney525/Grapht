@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(TreeNodeScript))]
-public class HookListeningScript : MonoBehaviour {
+public class HookChildScript : MonoBehaviour {
 
     private TreeNodeScript node;
 
