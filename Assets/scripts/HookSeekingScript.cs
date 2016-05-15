@@ -7,10 +7,10 @@ public class HookSeekingScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         HookListeningScript hooker = this.HookerFromCollider2D(other);
-        if (hooker != null) {
-            this.replacement = hooker.MakeConnection(this.GetComponentInParent<TreeNodeScript>());
+        TreeNodeScript parentNode = this.GetComponentInParent<TreeNodeScript>();
+        if (hooker != null && parentNode.CanAcceptConnection()) {
+            this.replacement = hooker.MakeConnection(parentNode);
         }
-        Debug.Log("Enter");
     }
 
     void OnTriggerExit2D(Collider2D other) {
@@ -19,7 +19,6 @@ public class HookSeekingScript : MonoBehaviour {
             hooker.ReleaseConnection(this.replacement);
         }
         this.replacement = null;
-        Debug.Log("Exit");
     }
 
     private HookListeningScript HookerFromCollider2D(Collider2D coll) {
