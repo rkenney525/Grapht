@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+
 public class TreeNodeScript : MonoBehaviour {
 
-    private const float LINE_DISTANCE = 5;
+    private const float LINE_HEIGHT = 4;
+
+    private const int CONNECTION_LIMIT = 4;
+
+    private const int CHILD_WIDTH = 10;
 
     public GameObject BindingRef;
 
@@ -22,6 +28,9 @@ public class TreeNodeScript : MonoBehaviour {
         // Add to map
         this.children.Add(childNode, binding);
 
+        // Update angles
+        this.SetChildAngles();
+
         // Update child
         childNode.ChangeParent(this);
     }
@@ -36,14 +45,26 @@ public class TreeNodeScript : MonoBehaviour {
         this.ParentNode = parentNode;
     }
 
-    public Vector2 GetChildOffset() {
-        // TODO make this more dynamic
-        float xVal = (float) Math.Cos(Math.PI * 1.25) * LINE_DISTANCE;
-        float yVal = (float) Math.Sin(Math.PI * 1.25) * LINE_DISTANCE;
-        return new Vector2(xVal, yVal);
+    public void LoseChild(TreeNodeScript childNode) {
+        // TODO remove Binding from GameObject
+        this.children.Remove(childNode);
+        this.SetChildAngles();
     }
 
-    public void LoseChild(TreeNodeScript childNode) {
-        this.children.Remove(childNode);
+    public bool CanAcceptConnection() {
+        return this.children.Values.Count < CONNECTION_LIMIT;
+    }
+
+    private void SetChildAngles() {
+        // TODO sort the list
+        Binding[] bindings = this.children.Values.ToArray<Binding>();
+        float space = CHILD_WIDTH / (float) (bindings.Length + 1);
+        float start = -CHILD_WIDTH / 2;
+        Vector2 angle;
+        for (int i = 0; i < bindings.Length; i++) {
+            float x = start + (((float) i + 1) * space);
+            angle = new Vector2(x, -LINE_HEIGHT);
+            bindings[i].UpdateAngle(angle);
+        }
     }
 }

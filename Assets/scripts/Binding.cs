@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(RelativeJoint2D))]
-public class Binding : MonoBehaviour {
+public class Binding : MonoBehaviour, IComparer<Binding> {
     public LineRenderer Line {get; private set;}
 
     public RelativeJoint2D Joint { get; private set; }
@@ -36,6 +37,13 @@ public class Binding : MonoBehaviour {
     private void SetUpJoint(TreeNodeScript parent) {
         this.Joint.autoConfigureOffset = false;
         this.Joint.connectedBody = parent.GetComponent<Rigidbody2D>();
-        this.Joint.linearOffset = parent.GetChildOffset();
+    }
+
+    public void UpdateAngle(Vector2 angle) {
+        this.Joint.linearOffset = angle;
+    }
+
+    public int Compare(Binding a, Binding b) {
+        return a.Joint.linearOffset.x.CompareTo(b.Joint.linearOffset.x);
     }
 }
