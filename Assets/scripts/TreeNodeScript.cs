@@ -1,52 +1,74 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class TreeNodeScript : MonoBehaviour {
-    private IList<TreeNodeScript> nodes = new List<TreeNodeScript>();
+using System;
+using System.Linq;
 
-    private const float LINE_WIDTH = 0.125f;
-    private const float LINE_DISTANCE = 5;
+public class TreeNodeScript : MonoBehaviour {
+
+    private const float LINE_HEIGHT = 4;
+
+    private const int CONNECTION_LIMIT = 4;
+
+    private const int CHILD_WIDTH = 10;
+
+    public GameObject BindingRef;
 
     public TreeNodeScript ParentNode { get; private set; }
 
-    private LineRenderer parentLine;
-
-    private DistanceJoint2D joint;
-
-    void Update() {
-        if (this.parentLine != null) {
-        this.parentLine.SetPosition(0, this.transform.position);
-        this.parentLine.SetPosition(1, this.joint.connectedBody.position);
-        }
-    }
+    private IDictionary<TreeNodeScript, Binding> children = new Dictionary<TreeNodeScript, Binding>();
 
     public void AddNewChild(TreeNodeScript childNode) {
-        this.nodes.Add(childNode);
+        // Create Binding and add to the parent
+        GameObject bindingObj = Instantiate(BindingRef);
+        bindingObj.transform.parent = this.transform;
+        Binding binding = bindingObj.GetComponent<Binding>();
+        binding.SetUp(childNode);
+
+        // Add to map
+        this.children.Add(childNode, binding);
+
+        // Update angles
+        this.SetChildAngles();
+
+        // Update child
         childNode.ChangeParent(this);
     }
 
+    public void Detach() {
+        this.ChangeParent(null);
+    }
+
     public void ChangeParent(TreeNodeScript parentNode) {
+        // Tell previous parent
         if (this.ParentNode != null) {
             this.ParentNode.LoseChild(this);
         }
-        this.ParentNode = parentNode;
-        if (this.joint == null) {
-            this.joint = this.gameObject.AddComponent<DistanceJoint2D>();
-        }
-        this.joint.connectedBody = this.ParentNode.GetComponent<Rigidbody2D>();
-        this.joint.distance = LINE_DISTANCE;
-        this.UpdateLine();
-    }
 
-    private void UpdateLine() {
-        if (this.parentLine == null) {
-            this.parentLine = this.gameObject.AddComponent<LineRenderer>();
-        }
-        this.parentLine.SetWidth(LINE_WIDTH, LINE_WIDTH);
-        this.parentLine.SetColors(Color.black, Color.black);
+        // Change parent reference
+        this.ParentNode = parentNode;
     }
 
     public void LoseChild(TreeNodeScript childNode) {
-        this.nodes.Remove(childNode);
+        Destroy(this.children[childNode].gameObject);
+        this.children.Remove(childNode);
+        this.SetChildAngles();
+    }
+
+    public bool CanAcceptConnection() {
+        return this.children.Values.Count < CONNECTION_LIMIT;
+    }
+
+    private void SetChildAngles() {
+        // TODO sort the list
+        Binding[] bindings = this.children.Values.ToArray<Binding>();
+        float space = CHILD_WIDTH / (float)(bindings.Length + 1);
+        float start = -CHILD_WIDTH / 2;
+        Vector2 angle;
+        for (int i = 0; i < bindings.Length; i++) {
+            float x = start + (((float)i + 1) * space);
+            angle = new Vector2(x, -LINE_HEIGHT);
+            bindings[i].UpdateAngle(angle);
+        }
     }
 }

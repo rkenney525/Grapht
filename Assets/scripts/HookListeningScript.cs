@@ -24,11 +24,13 @@ public class HookListeningScript : MonoBehaviour {
 
     public void BeginListening() {
         this.connectingNode = this.node.ParentNode;
+        this.node.Detach();
     }
 
     public void EndAndConnect() {
         if (this.connectingNode != null) {
-            this.node.AddNewChild(this.connectingNode);
+            this.connectingNode.AddNewChild(this.node);
+            this.connectingNode = null;
         }
     }
 }
