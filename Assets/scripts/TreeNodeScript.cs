@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 public class TreeNodeScript : MonoBehaviour {
@@ -70,5 +68,14 @@ public class TreeNodeScript : MonoBehaviour {
             angle = new Vector2(x, -LINE_HEIGHT);
             bindings[i].UpdateAngle(angle);
         }
+    }
+
+    public int BranchValue() {
+        // TODO implement
+        return 0;
+    }
+
+    public bool IsLeaf() {
+        return this.ParentNode == null;
     }
 }
