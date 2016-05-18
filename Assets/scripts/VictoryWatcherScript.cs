@@ -17,7 +17,16 @@ public class VictoryWatcherScript : MonoBehaviour {
 
     public void CheckVictory() {
         IList<TreeNodeScript> leaves = this.Leaves();
-        
+        // Get the sum of the first leaf
+        int sum = leaves[0].BranchValue();
+        for (int i = 1; i < leaves.Count; i++) {
+            Debug.Log(leaves[i].BranchValue());
+            // If any node is not equal, then terminate the check early
+            if (leaves[i].BranchValue() != sum) {
+                return;
+            }
+        }
+        this.HandleVictory();
     }
     
     private IList<TreeNodeScript> Leaves() {

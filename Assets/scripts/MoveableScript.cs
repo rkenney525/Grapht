@@ -11,10 +11,13 @@ public class MoveableScript : MonoBehaviour {
 
     private HookChildScript hooker;
 
+    private VictoryWatcherScript watcher;
+
 	void Start () {
         this.selected = false;
         this.rigidBody = this.GetComponent<Rigidbody2D>();
         this.hooker = this.GetComponent<HookChildScript>();
+        this.watcher = FindObjectOfType<VictoryWatcherScript>();
 	}
 	
 	// Update is called once per frame
@@ -27,6 +30,7 @@ public class MoveableScript : MonoBehaviour {
     void OnMouseUp() {
         this.selected = false;
         this.hooker.EndAndConnect();
+        this.watcher.CheckVictory();
     }
 
     void OnMouseDown() {

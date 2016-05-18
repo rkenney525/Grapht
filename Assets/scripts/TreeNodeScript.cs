@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+[RequireComponent(typeof(NumericValueScript))]
 public class TreeNodeScript : MonoBehaviour {
 
     private const float LINE_HEIGHT = 4;
@@ -14,7 +15,13 @@ public class TreeNodeScript : MonoBehaviour {
 
     public TreeNodeScript ParentNode { get; private set; }
 
+    private NumericValueScript value;
+
     private IDictionary<TreeNodeScript, Binding> children = new Dictionary<TreeNodeScript, Binding>();
+
+    void Start() {
+        this.value = this.GetComponent<NumericValueScript>();
+    }
 
     public void AddNewChild(TreeNodeScript childNode) {
         // Create Binding and add to the parent
@@ -71,11 +78,10 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     public int BranchValue() {
-        // TODO implement
-        return 0;
+        return this.value.Value() + (this.ParentNode == null ? 0 : this.ParentNode.BranchValue());
     }
 
     public bool IsLeaf() {
-        return this.ParentNode == null;
+        return this.children.Count == 0;
     }
 }
