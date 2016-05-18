@@ -84,4 +84,8 @@ public class TreeNodeScript : MonoBehaviour {
     public bool IsLeaf() {
         return this.children.Count == 0;
     }
+
+    public TreeNodeScript Root() {
+        return (this.ParentNode == null) ? this : this.ParentNode.Root();
+    }
 }
