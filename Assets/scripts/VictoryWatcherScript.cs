@@ -8,10 +8,9 @@ public class VictoryWatcherScript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        // TODO see if c# can do any better than this
         TreeNodeScript[] nodeArray = FindObjectsOfType<TreeNodeScript>();
-        for (int i = 0; i < nodeArray.Length; i++) {
-            nodes.Add(nodeArray[i]);
+        foreach (TreeNodeScript node in nodeArray) {
+            nodes.Add(node);
         }
     }
 
@@ -20,10 +19,10 @@ public class VictoryWatcherScript : MonoBehaviour {
         // Get the sum of the first leaf
         int sum = leaves[0].BranchValue();
         TreeNodeScript root = leaves[0].Root();
-        for (int i = 1; i < leaves.Count; i++) {
+        foreach (TreeNodeScript leaf in leaves) {
             // If any node is not equal or doesnt have the same root, then terminate the check early
-            if (leaves[i].BranchValue() != sum ||
-                !leaves[i].Root().Equals(root)) {
+            if (leaf.BranchValue() != sum ||
+                !leaf.Root().Equals(root)) {
                 return;
             }
         }
@@ -32,10 +31,9 @@ public class VictoryWatcherScript : MonoBehaviour {
 
     private IList<TreeNodeScript> Leaves() {
         IList<TreeNodeScript> leaves = new List<TreeNodeScript>();
-        // TODO again, see if we can do something more functional
-        for (int i = 0; i < this.nodes.Count; i++) {
-            if (this.nodes[i].IsLeaf()) {
-                leaves.Add(this.nodes[i]);
+        foreach (TreeNodeScript node in this.nodes) {
+            if (node.IsLeaf()) {
+                leaves.Add(node);
             }
         }
         return leaves;
