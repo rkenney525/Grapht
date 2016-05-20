@@ -91,9 +91,14 @@ public class CameraControlScript : MonoBehaviour {
     /// </summary>
     /// <param name="position"></param>
     void HandlePan(Vector3 position) {
-        // TODO factor in the world limits
+        // Calculate the delta in the mouse position
         Vector3 delta = this.previousMousePosition - position;
-        this.transform.position += delta;
+
+        // Calculate the bounded position the camera should take
+        Vector3 boundedPosition = this.BoundCameraPosition(this.transform.position + delta);
+
+        // Set the new camera position
+        this.transform.position = boundedPosition;
     }
 
     /// <summary>
@@ -108,10 +113,42 @@ public class CameraControlScript : MonoBehaviour {
         float newZoom = this.cam.orthographicSize + zoomChange;
 
         // Apply the min and max
-        newZoom = Mathf.Min(MAX_ZOOM, newZoom);
-        newZoom = Mathf.Max(MIN_ZOOM, newZoom);
+        newZoom = this.ApplyBounds(newZoom, MAX_ZOOM, MIN_ZOOM);
 
         // Set the zoom
         this.cam.orthographicSize = newZoom;
+
+        // Adjust the camera position based on the zoom
+        this.transform.position = this.BoundCameraPosition(this.transform.position);
+    }
+
+    /// <summary>
+    /// Bound the provided position to the world view. A position is bounded if it does not allow area outside the bounds to be viewed
+    /// </summary>
+    /// <param name="position">The camera position</param>
+    private Vector3 BoundCameraPosition(Vector3 position) {
+        // Get the view limits based on the zoom
+        float verticalView = this.cam.orthographicSize;
+        float horizontalView = verticalView * (Screen.width / Screen.height);
+
+        // Bound the position based on the zoom
+        position.x = this.ApplyBounds(position.x, WORLD_LIMIT_RIGHT - horizontalView, WORLD_LIMIT_LEFT + horizontalView);
+        position.y = this.ApplyBounds(position.y, WORLD_LIMIT_TOP - verticalView, WORLD_LIMIT_BOTTOM + verticalView);
+        
+        // Return the position
+        return position;
+    }
+
+    /// <summary>
+    /// Returns value, guaranteed to be no larger than max and no smaller than min
+    /// </summary>
+    /// <param name="value">The value to transform</param>
+    /// <param name="max">The maximum possible value</param>
+    /// <param name="min">The minimum possible value</param>
+    /// <returns>The value bounded by max and min</returns>
+    private float ApplyBounds(float value, float max, float min) {
+        value = Mathf.Min(max, value);
+        value = Mathf.Max(min, value);
+        return value;
     }
 }
