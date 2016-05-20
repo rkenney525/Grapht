@@ -18,10 +18,16 @@ public class HookChildScript : MonoBehaviour {
     private TreeNodeScript connectingNode;
 
     /// <summary>
-    /// Load the TreeScriptNode reference when this component is created
+    /// Whether the node is being manipulated by the user or not
+    /// </summary>
+    public bool Selected;
+
+    /// <summary>
+    /// Load the TreeScriptNode reference and set other properties when this component is created
     /// </summary>
     void Start() {
         this.node = this.GetComponent<TreeNodeScript>();
+        this.Selected = false;
     }
 
     /// <summary>
@@ -47,6 +53,7 @@ public class HookChildScript : MonoBehaviour {
     /// Start looking for a parent by detaching from the current one (if it exists) and storing a reference to it in case no parent is found
     /// </summary>
     public void BeginListening() {
+        this.Selected = true;
         this.connectingNode = this.node.ParentNode;
         this.node.Detach();
     }
@@ -55,6 +62,7 @@ public class HookChildScript : MonoBehaviour {
     /// Connect to the specified parent, if one exisst. It would either be a new parent or the previous one if none were found
     /// </summary>
     public void EndAndConnect() {
+        this.Selected = false;
         if (this.connectingNode != null) {
             this.connectingNode.AddNewChild(this.node);
             this.connectingNode = null;

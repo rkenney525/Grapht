@@ -17,8 +17,8 @@ public class HookParentScript : MonoBehaviour {
     /// <param name="other">The Collider2D, presumably a node being dragged</param>
     void OnTriggerEnter2D(Collider2D other) {
         HookChildScript hooker = this.HookerFromCollider2D(other);
-        TreeNodeScript parentNode = this.GetComponentInParent<TreeNodeScript>();
-        if (hooker != null && parentNode.CanAcceptConnection()) {
+        TreeNodeScript parentNode = this.GetComponent<TreeNodeScript>();
+        if (hooker != null && hooker.Selected && parentNode.CanAcceptConnection()) {
             this.replacement = hooker.MakeConnection(parentNode);
         }
     }
@@ -29,7 +29,7 @@ public class HookParentScript : MonoBehaviour {
     /// <param name="other">The Collider2D, presumably a node being dragged</param>
     void OnTriggerExit2D(Collider2D other) {
         HookChildScript hooker = this.HookerFromCollider2D(other);
-        if (hooker != null) {
+        if (hooker != null && hooker.Selected) {
             hooker.ReleaseConnection(this.replacement);
         }
         this.replacement = null;

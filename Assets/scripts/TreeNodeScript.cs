@@ -21,7 +21,7 @@ public class TreeNodeScript : MonoBehaviour {
     /// <summary>
     /// The horizontal space that child nodes will be distributed in
     /// </summary>
-    private const int CHILD_WIDTH = 10;
+    private const int CHILD_WIDTH = 11;
 
     /// <summary>
     /// TODO find a way to set this outside of the editor
@@ -65,11 +65,11 @@ public class TreeNodeScript : MonoBehaviour {
         // Add to map
         this.children.Add(childNode, binding);
 
-        // Update angles
-        this.SetChildAngles();
-
         // Update child
         childNode.ChangeParent(this);
+
+        // Update angles
+        this.UpdateAnglesFromRoot();
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class TreeNodeScript : MonoBehaviour {
     public void LoseChild(TreeNodeScript childNode) {
         Destroy(this.children[childNode].gameObject);
         this.children.Remove(childNode);
-        this.SetChildAngles();
+        this.UpdateAnglesFromRoot();
     }
 
     /// <summary>
@@ -112,19 +112,39 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Set the angles of all children
+    /// Set the angles of all children for the current level
     /// </summary>
-    private void SetChildAngles() {
-        // TODO sort the list
-        Binding[] bindings = this.children.Values.ToArray<Binding>();
-        float space = CHILD_WIDTH / (float)(bindings.Length + 1);
-        float start = -CHILD_WIDTH / 2;
+    /// <param name="remainingDepth">The layers of children left in the graph</param>
+    private void SetChildAngles(int remainingDepth) {
+        // Get the bindings
+        Binding[] bindings = this.children.Select(set => set.Value).OrderBy(binding => binding.Offset()).ToArray<Binding>();
+
+        // Calculate the distances between nodes
+        float layerWidth = ((float) CHILD_WIDTH * remainingDepth) * 1.5f;
+        float space = layerWidth / (float)(bindings.Length + 1);
+        float start = -layerWidth / 2;
+
+        // Manipulate the angle of the nodes
         Vector2 angle;
         for (int i = 0; i < bindings.Length; i++) {
             float x = start + (((float)i + 1) * space);
             angle = new Vector2(x, -LINE_HEIGHT);
             bindings[i].UpdateAngle(angle);
         }
+
+        // Update the grandchildren
+        foreach (TreeNodeScript child in this.children.Select(set => set.Key).ToArray()) {
+            child.SetChildAngles(remainingDepth - 1);
+        }
+    }
+
+    private void UpdateAnglesFromRoot() {
+        // Get root's max depth
+        TreeNodeScript root = this.Root();
+        int depth = root.MaxDepth();
+
+        // Update angles recursively
+        root.SetChildAngles(depth - 1);
     }
 
     /// <summary>
@@ -144,10 +164,29 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     /// <summary>
+    /// Check if the current node is the root of its tree
+    /// </summary>
+    /// <returns>True if the node is a root node, false otherwise</returns>
+    public bool IsRoot() {
+        return this.ParentNode == null;
+    }
+
+    /// <summary>
     /// Get the root parent for this node. This is the node furthest up (parent direction) of the graph
     /// </summary>
     /// <returns>The root parent for this node</returns>
     public TreeNodeScript Root() {
-        return (this.ParentNode == null) ? this : this.ParentNode.Root();
+        return (this.IsRoot()) ? this : this.ParentNode.Root();
+    }
+    /// <summary>
+    /// Gets the number of layers in the graph
+    /// </summary>
+    /// <returns>The number of layers deep the graph has</returns>
+    private int MaxDepth() {
+        int max = 1;
+        if (this.children.Count > 0) {
+            max += this.children.Max(child => child.Key.MaxDepth());
+        }
+        return max;
     }
 }
