@@ -27,7 +27,7 @@ public class TreeNodeScript : MonoBehaviour {
     /// TODO make this a value calculated from the width of the sprite
     /// The width a single node with no children needs
     /// </summary>
-    private const float SINGLE_NODE_WIDTH = 2.5f;
+    private const float SINGLE_NODE_WIDTH = 3.25f;
 
     /// <summary>
     /// TODO find a way to set this outside of the editor
