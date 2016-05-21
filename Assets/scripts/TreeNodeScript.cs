@@ -21,7 +21,13 @@ public class TreeNodeScript : MonoBehaviour {
     /// <summary>
     /// The horizontal space that child nodes will be distributed in
     /// </summary>
-    private const int CHILD_WIDTH = 10;
+    private const int CHILD_WIDTH = 11;
+
+    /// <summary>
+    /// TODO make this a value calculated from the width of the sprite
+    /// The width a single node with no children needs
+    /// </summary>
+    private const float SINGLE_NODE_WIDTH = 3.25f;
 
     /// <summary>
     /// TODO find a way to set this outside of the editor
@@ -45,10 +51,16 @@ public class TreeNodeScript : MonoBehaviour {
     private IDictionary<TreeNodeScript, Binding> children = new Dictionary<TreeNodeScript, Binding>();
 
     /// <summary>
-    /// Get the NumericValueScript when the component is created
+    /// The width of the node
+    /// </summary>
+    private float width;
+
+    /// <summary>
+    /// Get the NumericValueScript and other properties when the component is created
     /// </summary>
     void Start() {
         this.value = this.GetComponent<NumericValueScript>();
+        this.width = SINGLE_NODE_WIDTH;
     }
 
     /// <summary>
@@ -65,11 +77,11 @@ public class TreeNodeScript : MonoBehaviour {
         // Add to map
         this.children.Add(childNode, binding);
 
-        // Update angles
-        this.SetChildAngles();
-
         // Update child
         childNode.ChangeParent(this);
+
+        // Update angles
+        this.UpdateAnglesFromRoot();
     }
 
     /// <summary>
@@ -100,7 +112,7 @@ public class TreeNodeScript : MonoBehaviour {
     public void LoseChild(TreeNodeScript childNode) {
         Destroy(this.children[childNode].gameObject);
         this.children.Remove(childNode);
-        this.SetChildAngles();
+        this.UpdateAnglesFromRoot();
     }
 
     /// <summary>
@@ -112,19 +124,53 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     /// <summary>
+    /// Update the width of the node and its children
+    /// </summary>
+    private void UpdateWidth() {
+        if (this.IsLeaf()) {
+            this.width = SINGLE_NODE_WIDTH;
+        } else {
+            this.width = this.children.Select(set => set.Key).Sum(node => {
+                node.UpdateWidth();
+                return node.width;
+            });
+        }
+    }
+
+    /// <summary>
     /// Set the angles of all children
     /// </summary>
     private void SetChildAngles() {
-        // TODO sort the list
-        Binding[] bindings = this.children.Values.ToArray<Binding>();
-        float space = CHILD_WIDTH / (float)(bindings.Length + 1);
-        float start = -CHILD_WIDTH / 2;
-        Vector2 angle;
-        for (int i = 0; i < bindings.Length; i++) {
-            float x = start + (((float)i + 1) * space);
-            angle = new Vector2(x, -LINE_HEIGHT);
-            bindings[i].UpdateAngle(angle);
-        }
+        // Get the width of the node
+        float width = this.width;
+
+        // Set the angles for each child
+        float position = -width / 2.0f;
+        this.children.All(set => {
+            // Get the position and set the node there
+            float offset = set.Key.width / 2.0f;
+            position += offset;
+            Vector2 angle = new Vector2(position, -LINE_HEIGHT);
+            set.Value.UpdateAngle(angle);
+            position += offset;
+            // Update the child
+            set.Key.SetChildAngles();
+            // return success
+            return true;
+        });
+    }
+
+    /// <summary>
+    /// Update all angles starting from the top of the tree
+    /// </summary>
+    private void UpdateAnglesFromRoot() {
+        // Update the root and its children's widths
+        // Note that this is slightly wasteful since we have to traverse the tree later anyway, but this is more explicit at least.
+        TreeNodeScript root = this.Root();
+        root.UpdateWidth();
+
+        // Update angles recursively
+        root.SetChildAngles();
     }
 
     /// <summary>
@@ -144,10 +190,18 @@ public class TreeNodeScript : MonoBehaviour {
     }
 
     /// <summary>
+    /// Check if the current node is the root of its tree
+    /// </summary>
+    /// <returns>True if the node is a root node, false otherwise</returns>
+    public bool IsRoot() {
+        return this.ParentNode == null;
+    }
+
+    /// <summary>
     /// Get the root parent for this node. This is the node furthest up (parent direction) of the graph
     /// </summary>
     /// <returns>The root parent for this node</returns>
     public TreeNodeScript Root() {
-        return (this.ParentNode == null) ? this : this.ParentNode.Root();
+        return (this.IsRoot()) ? this : this.ParentNode.Root();
     }
 }

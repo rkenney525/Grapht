@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 [RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(RelativeJoint2D))]
-public class Binding : MonoBehaviour, IComparer<Binding> {
+public class Binding : MonoBehaviour {
     /// <summary>
     /// The line to draw from the parent to the child
     /// </summary>
@@ -74,12 +74,10 @@ public class Binding : MonoBehaviour, IComparer<Binding> {
     }
 
     /// <summary>
-    /// Comnpares Bindings a to b. This comparison is based on the x position of the joints offset
+    /// Gets the x coordinate in the Joint's offset
     /// </summary>
-    /// <param name="a">The first Binding</param>
-    /// <param name="b">The second Binding</param>
-    /// <returns></returns>
-    public int Compare(Binding a, Binding b) {
-        return a.Joint.linearOffset.x.CompareTo(b.Joint.linearOffset.x);
+    /// <returns>The x coordinate in the Joint's offset</returns>
+    public float Offset() {
+        return this.Joint.linearOffset.x;
     }
 }
