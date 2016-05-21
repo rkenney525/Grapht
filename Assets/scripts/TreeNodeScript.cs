@@ -204,4 +204,15 @@ public class TreeNodeScript : MonoBehaviour {
     public TreeNodeScript Root() {
         return (this.IsRoot()) ? this : this.ParentNode.Root();
     }
+    /// <summary>
+    /// Gets the number of layers in the graph
+    /// </summary>
+    /// <returns>The number of layers deep the graph has</returns>
+    public int Depth() {
+        int max = 1;
+        if (this.children.Count > 0) {
+            max += this.children.Max(child => child.Key.Depth());
+        }
+        return max;
+    }
 }
