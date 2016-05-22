@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Grapht.Exception;
+using SimpleJSON;
+using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
@@ -45,4 +47,34 @@ public class VictoryConditions {
         delegate (IList<TreeNodeScript> nodes) {
             return nodes.Select(node => node.Root()).Distinct().Count() == 1;
         };
+
+    /// <summary>
+    /// Get the RootCondition for the associated JSON node
+    /// </summary>
+    /// <param name="json">The JSON node to parse</param>
+    /// <returns>A RootCondition identified by the json's name</returns>
+    public static RootCondition ParseRootCondition(JSONNode json) {
+        switch (json["name"]) {
+            case "MaxDepth":
+                return MaximumDepth(json["arg"].AsInt);
+            default:
+                throw new GraphtParsingException();
+        }
+    }
+
+    /// <summary>
+    /// Get the TreeCondition for the associated JSON node
+    /// </summary>
+    /// <param name="json">The JSON node to parse</param>
+    /// <returns>A TreeCondition identified by the json's name</returns>
+    public static TreeCondition ParseTreeCondition(JSONNode json) {
+        switch (json["name"]) {
+            case "SameSumBranch":
+                return SameSumBranch;
+            case "SingleTree":
+                return SingleTree;
+            default:
+                throw new GraphtParsingException();
+        }
+    }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 /// <summary>
@@ -15,8 +14,8 @@ public class NumericValueScript : MonoBehaviour {
     /// <summary>
     /// Get the Text field when this component is created
     /// </summary>
-	void Start () {
-        this.text = this.GetComponentInChildren<Text>();
+	public void SetUp () {
+        text = GetComponentInChildren<Text>();
 	}
 
     /// <summary>
@@ -24,6 +23,14 @@ public class NumericValueScript : MonoBehaviour {
     /// </summary>
     /// <returns>The numeric value stored in the Text field</returns>
     public int Value() {
-        return System.Int32.Parse(this.text.text);
+        return int.Parse(text.text);
+    }
+
+    /// <summary>
+    /// Set the numeric value
+    /// </summary>
+    /// <param name="value">The value to set</param>
+    public void SetValue(int value) {
+        text.text = value.ToString();
     }
 }

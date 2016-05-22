@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Grapht.Config;
 
 /// <summary>
 /// Checks if the victory conditions for the game have been met, when invoked.
@@ -10,33 +11,32 @@ public class VictoryWatcherScript : MonoBehaviour {
     /// <summary>
     /// All nodes in the Scene
     /// </summary>
-    private IList<TreeNodeScript> nodes = new List<TreeNodeScript>();
+    private IList<TreeNodeScript> nodes;
 
     /// <summary>
     /// Victory conditions for the root of the graph
     /// </summary>
-    private IList<RootCondition> rootConditions = new List<RootCondition>();
+    private IList<RootCondition> rootConditions;
 
     /// <summary>
     /// Victory conditions for all branches in the graph
     /// </summary>
-    private IList<TreeCondition> branchConditions = new List<TreeCondition>();
+    private IList<TreeCondition> branchConditions;
 
     /// <summary>
     /// Victory conditions for all nodes in the graph
     /// </summary>
-    private IList<TreeCondition> globalConditions = new List<TreeCondition>();
+    private IList<TreeCondition> globalConditions;
 
     /// <summary>
-    /// Load all nodes in the Scene
+    /// Load configuration for a particular level
     /// </summary>
-    void Start() {
+    /// <param name="level">The level configuration to use</param>
+    public void LoadLevel(Level level) {
         nodes = FindObjectsOfType<TreeNodeScript>();
-
-        // TODO Configure rules per level
-        rootConditions.Add(VictoryConditions.MaximumDepth(3));
-        branchConditions.Add(VictoryConditions.SameSumBranch);
-        globalConditions.Add(VictoryConditions.SingleTree);
+        rootConditions = level.RootConditions;
+        branchConditions = level.BranchConditions;
+        globalConditions = level.GlobalConditions;
     }
 
     /// <summary>
