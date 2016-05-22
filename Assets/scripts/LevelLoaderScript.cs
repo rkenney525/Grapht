@@ -51,9 +51,6 @@ public class LevelLoaderScript : MonoBehaviour {
         watcher = FindObjectOfType<VictoryWatcherScript>();
         // TODO load currentLevel from save data
         currentLevel = 1;
-        // TODO remove this line after testing and when the stage is initially clean
-        ClearStage();
-        ////////////
         levels = LoadLevels();
         LoadLevel(currentLevel);
     }
