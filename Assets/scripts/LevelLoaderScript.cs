@@ -76,10 +76,11 @@ public class LevelLoaderScript : MonoBehaviour {
         // Get the appropriate level
         Level level = levels.Where(lev => lev.Id == levelId).First();
 
-        // TODO Configure the victory conditions
-
         // Add the specified nodes and their children
         PlaceNodesInWorld(level.Nodes);
+
+        // Configure the victory conditions
+        watcher.LoadLevel(level);
     }
 
     /// <summary>
