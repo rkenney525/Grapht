@@ -54,8 +54,21 @@
         ]
       }
     ],
-    "rootConditions": [ ],
-    "branchConditions": [ ],
-    "globalConditions": [ ]
+    "rootConditions": [
+      {
+        "name": "MaxDepth",
+        "arg": 3
+      }
+    ],
+    "branchConditions": [
+      {
+        "name": "SameSumBranch"
+      }
+    ],
+    "globalConditions": [
+      {
+        "name": "SingleTree"
+      }
+    ]
   }
 ]

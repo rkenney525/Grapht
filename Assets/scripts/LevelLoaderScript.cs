@@ -39,7 +39,7 @@ public class LevelLoaderScript : MonoBehaviour {
     private IList<Level> levels;
 
     /// <summary>
-    /// 
+    /// The current level loaded in the scene
     /// </summary>
     private int currentLevel;
     

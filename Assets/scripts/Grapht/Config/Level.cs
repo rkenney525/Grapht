@@ -1,4 +1,5 @@
-﻿using SimpleJSON;
+﻿using Grapht.Exception;
+using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,6 +42,9 @@ namespace Grapht.Config {
             Level obj = new Level();
             obj.Id = levelNode["id"].AsInt;
             obj.Nodes = levelNode["nodes"].AsArray.Childs.Select(node => Node.Parse(node)).ToList();
+            obj.RootConditions = levelNode["rootConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseRootCondition(rule)).ToList();
+            obj.BranchConditions = levelNode["branchConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseTreeCondition(rule)).ToList();
+            obj.GlobalConditions = levelNode["globalConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseTreeCondition(rule)).ToList();
             return obj;
         }
     }
