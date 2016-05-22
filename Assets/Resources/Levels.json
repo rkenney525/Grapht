@@ -7,10 +7,16 @@
           "x": 0,
           "y": 14
         },
-        "value": 0,
-        "type": "Immoveable",
+        "value": 11,
+        "type": 0,
         "children": [
+          {
+            "value": 22,
+            "type": 1,
+            "children": [
 
+            ]
+          }
         ]
       }
     ],

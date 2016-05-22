@@ -30,7 +30,6 @@ public class TreeNodeScript : MonoBehaviour {
     private const float SINGLE_NODE_WIDTH = 3.25f;
 
     /// <summary>
-    /// TODO find a way to set this outside of the editor
     /// A reference to the Binding prefab
     /// </summary>
     public GameObject BindingRef;
