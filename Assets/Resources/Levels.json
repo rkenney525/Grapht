@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "nodes": [
+      {
+        "pos": {
+          "x": 0,
+          "y": 14
+        },
+        "value": 0,
+        "type": "Immoveable",
+        "children": [
+
+        ]
+      }
+    ],
+    "rootConditions": [ ],
+    "branchConditions": [ ],
+    "globalConditions": [ ]
+  }
+]
