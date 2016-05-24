@@ -52,7 +52,6 @@ public class LevelLoaderScript : MonoBehaviour {
         // TODO load currentLevel from save data
         currentLevel = 1;
         levels = LoadLevels();
-        LoadLevel(currentLevel);
     }
 
     /// <summary>
@@ -129,9 +128,16 @@ public class LevelLoaderScript : MonoBehaviour {
     }
 
     /// <summary>
+    /// Load the current level
+    /// </summary>
+    public void LoadCurrentLevel() {
+        LoadLevel(currentLevel);
+    }
+
+    /// <summary>
     /// Remove all nodes from the Scene
     /// </summary>
-    private void ClearStage() {
+    public void ClearStage() {
         for (int i = 0; i < canvas.transform.childCount; i++) {
             Destroy(canvas.transform.GetChild(i).gameObject);
         }
