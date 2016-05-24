@@ -29,7 +29,6 @@ GameObject:
   - 114: {fileID: 11420928}
   - 50: {fileID: 5012014}
   - 114: {fileID: 11461278}
-  - 114: {fileID: 11425596}
   - 61: {fileID: 6148556}
   m_Layer: 0
   m_Name: Immovable Node
@@ -124,17 +123,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ed1dab9c4553cd4e8d42957cc38884d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11425596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065047157b77e0749b74aa27d7e953a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11461278

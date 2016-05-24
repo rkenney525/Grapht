@@ -5,7 +5,7 @@ using System.Collections;
 /// Captures the logic for moving a node
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(HookChildScript))]
+[RequireComponent(typeof(HookerScript))]
 public class MoveableScript : MonoBehaviour {
 
     /// <summary>
@@ -21,7 +21,7 @@ public class MoveableScript : MonoBehaviour {
     /// <summary>
     /// The HookChildScript componentn associated with this node. Used to look for a parent node
     /// </summary>
-    private HookChildScript hooker;
+    private HookerScript hooker;
 
     /// <summary>
     /// The global VictoryWatcherScript. Invoked when the watcher should check the victory conditions
@@ -34,7 +34,7 @@ public class MoveableScript : MonoBehaviour {
 	void Start () {
         this.selected = false;
         this.rigidBody = this.GetComponent<Rigidbody2D>();
-        this.hooker = this.GetComponent<HookChildScript>();
+        this.hooker = this.GetComponent<HookerScript>();
         this.watcher = FindObjectOfType<VictoryWatcherScript>();
 	}
 	
@@ -52,7 +52,7 @@ public class MoveableScript : MonoBehaviour {
     /// </summary>
     void OnMouseUp() {
         this.selected = false;
-        this.hooker.EndAndConnect();
+        this.hooker.DoConnect();
         this.watcher.CheckVictory();
     }
 
