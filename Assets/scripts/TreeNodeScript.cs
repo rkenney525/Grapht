@@ -203,6 +203,16 @@ public class TreeNodeScript : MonoBehaviour {
     public TreeNodeScript Root() {
         return (this.IsRoot()) ? this : this.ParentNode.Root();
     }
+
+    /// <summary>
+    /// Check if a node is equal to or has as a parent a particular node
+    /// </summary>
+    /// <param name="parent">The node to check</param>
+    /// <returns>True if the node is equal to the current node or any of its ancestors, false otherwise</returns>
+    public bool HasParent(TreeNodeScript parent) {
+        return this.Equals(parent) ? true : (IsRoot() ? false : ParentNode.HasParent(parent));
+    }
+
     /// <summary>
     /// Gets the number of layers in the graph
     /// </summary>
