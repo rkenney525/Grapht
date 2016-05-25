@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manage interactivity of the game via states
@@ -31,8 +32,15 @@ public class StateManagerScript : MonoBehaviour {
     /// </summary>
     private Canvas menuCanvas;
 
-
+    /// <summary>
+    /// Canvas for the victory overlay
+    /// </summary>
     private Canvas victoryCanvas;
+
+    /// <summary>
+    /// The button for the next level on the victory overlay
+    /// </summary>
+    private Button nextLevelButton;
 
     /// <summary>
     /// Apply the starting state and load needed components
@@ -41,6 +49,7 @@ public class StateManagerScript : MonoBehaviour {
         cameraControls = FindObjectOfType<CameraControlScript>();
         menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
         victoryCanvas = GameObject.Find("Victory").GetComponent<Canvas>();
+        nextLevelButton = GameObject.Find("Next Level Button").GetComponent<Button>();
         loader = FindObjectOfType<LevelLoaderScript>();
         ApplyState();
     }
@@ -81,14 +90,21 @@ public class StateManagerScript : MonoBehaviour {
                 menuCanvas.enabled = false;
                 break;
             case State.VICTORY:
+                loader.ClearStage();
                 victoryCanvas.enabled = true;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = false;
+                nextLevelButton.enabled = loader.HasNextLevel();
                 break;
             case State.QUITTING:
                 // TODO save any progress
                 Application.Quit();
                 break;
         }
+    }
+
+    public void NextLevel() {
+        loader.CurrentLevel++;
+        ChangeState(State.GAME);
     }
 }

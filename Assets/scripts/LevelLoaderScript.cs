@@ -41,7 +41,7 @@ public class LevelLoaderScript : MonoBehaviour {
     /// <summary>
     /// The current level loaded in the scene
     /// </summary>
-    private int currentLevel;
+    public int CurrentLevel;
     
     /// <summary>
     /// Load all references/external data on component creation
@@ -50,7 +50,7 @@ public class LevelLoaderScript : MonoBehaviour {
         canvas = GameObject.Find(CANVAS_OBJECT_NAME);
         watcher = FindObjectOfType<VictoryWatcherScript>();
         // TODO load currentLevel from save data
-        currentLevel = 1;
+        CurrentLevel = 1;
         levels = LoadLevels();
     }
 
@@ -121,17 +121,18 @@ public class LevelLoaderScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Load the next Level
+    /// Check if the next level is available
     /// </summary>
-    public void NextLevel() {
-        LoadLevel(++currentLevel);
+    /// <returns></returns>
+    public bool HasNextLevel() {
+        return levels.Where(level => level.Id == CurrentLevel + 1).Count() == 1;
     }
 
     /// <summary>
     /// Load the current level
     /// </summary>
     public void LoadCurrentLevel() {
-        LoadLevel(currentLevel);
+        LoadLevel(CurrentLevel);
     }
 
     /// <summary>
