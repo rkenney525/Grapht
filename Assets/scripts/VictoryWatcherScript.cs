@@ -29,6 +29,18 @@ public class VictoryWatcherScript : MonoBehaviour {
     private IList<TreeCondition> globalConditions;
 
     /// <summary>
+    /// The state manager for the game
+    /// </summary>
+    private StateManagerScript stateManager;
+
+    /// <summary>
+    /// Load references when the component is created
+    /// </summary>
+    void Start() {
+        stateManager = GameObject.Find("StateManager").GetComponent<StateManagerScript>();
+    }
+
+    /// <summary>
     /// Load configuration for a particular level
     /// </summary>
     /// <param name="level">The level configuration to use</param>
@@ -49,17 +61,9 @@ public class VictoryWatcherScript : MonoBehaviour {
             if (branchConditions.All(check => check(nodes.Where(node => node.IsLeaf()).ToList()))) {
                 // And finally handle the root
                 if (rootConditions.All(check => check(nodes.First().Root()))) {
-                    HandleVictory();
+                    stateManager.ChangeState(StateManagerScript.State.VICTORY);
                 }
             }
         }
-    }
-
-    /// <summary>
-    /// Handle a victory. Currently does nothing
-    /// </summary>
-    private void HandleVictory() {
-        // TODO do something here
-        Debug.Log("WINNERRz");
     }
 }

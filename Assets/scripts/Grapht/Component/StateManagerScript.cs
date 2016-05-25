@@ -9,7 +9,7 @@ public class StateManagerScript : MonoBehaviour {
     /// <summary>
     /// Represents the interactivity state the game is in
     /// </summary>
-    public enum State { SPLASH, MAIN_MENU, GAME, QUITTING }
+    public enum State { MAIN_MENU, GAME, VICTORY, QUITTING }
 
     /// <summary>
     /// The current state of the game
@@ -31,12 +31,16 @@ public class StateManagerScript : MonoBehaviour {
     /// </summary>
     private Canvas menuCanvas;
 
+
+    private Canvas victoryCanvas;
+
     /// <summary>
     /// Apply the starting state and load needed components
     /// </summary>
     void Start() {
         cameraControls = FindObjectOfType<CameraControlScript>();
         menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
+        victoryCanvas = GameObject.Find("Victory").GetComponent<Canvas>();
         loader = FindObjectOfType<LevelLoaderScript>();
         ApplyState();
     }
@@ -64,19 +68,21 @@ public class StateManagerScript : MonoBehaviour {
     private void ApplyState() {
         // TODO better encapsulate these configurations
         switch (currentState) {
-            case State.SPLASH:
-                loader.ClearStage();
-                cameraControls.enabled = false;
-                menuCanvas.enabled = false;
-                break;
             case State.MAIN_MENU:
                 loader.ClearStage();
+                victoryCanvas.enabled = false;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = true;
                 break;
             case State.GAME:
                 loader.LoadCurrentLevel();
+                victoryCanvas.enabled = false;
                 cameraControls.enabled = true;
+                menuCanvas.enabled = false;
+                break;
+            case State.VICTORY:
+                victoryCanvas.enabled = true;
+                cameraControls.enabled = false;
                 menuCanvas.enabled = false;
                 break;
             case State.QUITTING:
