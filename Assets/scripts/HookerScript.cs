@@ -29,8 +29,10 @@ public class HookerScript : MonoBehaviour {
     /// Start looking for a parent by detaching from the current one (if it exists) and storing a reference to it in case no parent is found
     /// </summary>
     public void BeginListening() {
-        connectables.Add(this.node.ParentNode);
-        node.Detach();
+        if (node.ParentNode != null) {
+            connectables.Add(this.node.ParentNode);
+            node.Detach();
+        }
     }
 
     /// <summary>

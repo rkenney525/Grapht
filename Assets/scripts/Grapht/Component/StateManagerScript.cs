@@ -94,7 +94,7 @@ public class StateManagerScript : MonoBehaviour {
                 victoryCanvas.enabled = true;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = false;
-                nextLevelButton.enabled = loader.HasNextLevel();
+                nextLevelButton.interactable = loader.HasNextLevel();
                 break;
             case State.QUITTING:
                 // TODO save any progress

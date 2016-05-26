@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Grapht.Config;
+using System.Collections;
 
 /// <summary>
 /// Checks if the victory conditions for the game have been met, when invoked.
@@ -34,6 +35,11 @@ public class VictoryWatcherScript : MonoBehaviour {
     private StateManagerScript stateManager;
 
     /// <summary>
+    /// Time to wait before switching to the victory state
+    /// </summary>
+    private const float VICTORY_WAIT_TIME = 0.4f;
+
+    /// <summary>
     /// Load references when the component is created
     /// </summary>
     void Start() {
@@ -61,9 +67,14 @@ public class VictoryWatcherScript : MonoBehaviour {
             if (branchConditions.All(check => check(nodes.Where(node => node.IsLeaf()).ToList()))) {
                 // And finally handle the root
                 if (rootConditions.All(check => check(nodes.First().Root()))) {
-                    stateManager.ChangeState(StateManagerScript.State.VICTORY);
+                    StartCoroutine(HandleVictoryWithDelay());
                 }
             }
         }
+    }
+
+    private IEnumerator HandleVictoryWithDelay() {
+        yield return new WaitForSeconds(VICTORY_WAIT_TIME);
+        stateManager.ChangeState(StateManagerScript.State.VICTORY);
     }
 }
