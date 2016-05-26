@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manage interactivity of the game via states
@@ -9,7 +10,7 @@ public class StateManagerScript : MonoBehaviour {
     /// <summary>
     /// Represents the interactivity state the game is in
     /// </summary>
-    public enum State { SPLASH, MAIN_MENU, GAME, QUITTING }
+    public enum State { MAIN_MENU, GAME, VICTORY, QUITTING }
 
     /// <summary>
     /// The current state of the game
@@ -32,11 +33,23 @@ public class StateManagerScript : MonoBehaviour {
     private Canvas menuCanvas;
 
     /// <summary>
+    /// Canvas for the victory overlay
+    /// </summary>
+    private Canvas victoryCanvas;
+
+    /// <summary>
+    /// The button for the next level on the victory overlay
+    /// </summary>
+    private Button nextLevelButton;
+
+    /// <summary>
     /// Apply the starting state and load needed components
     /// </summary>
     void Start() {
         cameraControls = FindObjectOfType<CameraControlScript>();
         menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
+        victoryCanvas = GameObject.Find("Victory").GetComponent<Canvas>();
+        nextLevelButton = GameObject.Find("Next Level Button").GetComponent<Button>();
         loader = FindObjectOfType<LevelLoaderScript>();
         ApplyState();
     }
@@ -64,25 +77,34 @@ public class StateManagerScript : MonoBehaviour {
     private void ApplyState() {
         // TODO better encapsulate these configurations
         switch (currentState) {
-            case State.SPLASH:
-                loader.ClearStage();
-                cameraControls.enabled = false;
-                menuCanvas.enabled = false;
-                break;
             case State.MAIN_MENU:
                 loader.ClearStage();
+                victoryCanvas.enabled = false;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = true;
                 break;
             case State.GAME:
                 loader.LoadCurrentLevel();
+                victoryCanvas.enabled = false;
                 cameraControls.enabled = true;
                 menuCanvas.enabled = false;
+                break;
+            case State.VICTORY:
+                loader.ClearStage();
+                victoryCanvas.enabled = true;
+                cameraControls.enabled = false;
+                menuCanvas.enabled = false;
+                nextLevelButton.interactable = loader.HasNextLevel();
                 break;
             case State.QUITTING:
                 // TODO save any progress
                 Application.Quit();
                 break;
         }
+    }
+
+    public void NextLevel() {
+        loader.CurrentLevel++;
+        ChangeState(State.GAME);
     }
 }
