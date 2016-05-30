@@ -38,6 +38,11 @@ public class StateManagerScript : MonoBehaviour {
     private Canvas victoryCanvas;
 
     /// <summary>
+    /// Canvas for the game overlay
+    /// </summary>
+    private Canvas gameOverlayCanvas;
+
+    /// <summary>
     /// The button for the next level on the victory overlay
     /// </summary>
     private Button nextLevelButton;
@@ -49,6 +54,7 @@ public class StateManagerScript : MonoBehaviour {
         cameraControls = FindObjectOfType<CameraControlScript>();
         menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
         victoryCanvas = GameObject.Find("Victory").GetComponent<Canvas>();
+        gameOverlayCanvas = GameObject.Find("Rules").GetComponent<Canvas>();
         nextLevelButton = GameObject.Find("Next Level Button").GetComponent<Button>();
         loader = FindObjectOfType<LevelLoaderScript>();
         ApplyState();
@@ -79,18 +85,21 @@ public class StateManagerScript : MonoBehaviour {
         switch (currentState) {
             case State.MAIN_MENU:
                 loader.ClearStage();
+                gameOverlayCanvas.enabled = false;
                 victoryCanvas.enabled = false;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = true;
                 break;
             case State.GAME:
                 loader.LoadCurrentLevel();
+                gameOverlayCanvas.enabled = true;
                 victoryCanvas.enabled = false;
                 cameraControls.enabled = true;
                 menuCanvas.enabled = false;
                 break;
             case State.VICTORY:
                 loader.ClearStage();
+                gameOverlayCanvas.enabled = false;
                 victoryCanvas.enabled = true;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = false;
