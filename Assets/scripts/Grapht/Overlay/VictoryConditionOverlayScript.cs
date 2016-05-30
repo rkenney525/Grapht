@@ -7,14 +7,10 @@ namespace Grapht.Overlay {
     /// </summary>
     public class VictoryConditionOverlayScript : MonoBehaviour {
 
-        // Use this for initialization
-        void Start() {
+        private readonly Vector2 start = new Vector2(-580, 0);
 
-        }
+        private const float verticalSpace = 5.0f;
 
-        // Update is called once per frame
-        void Update() {
-
-        }
+        
     }
 }

@@ -38,6 +38,7 @@ namespace Grapht.Entity {
         /// <returns>The specified Victory condition</returns>
         public static VictoryCondition MaximumDepth(int maxDepth) {
             return new VictoryCondition(
+                string.Format("Max depth of %s nodes", maxDepth),
                 delegate(IList<TreeNodeScript> root) {
                     return root.First().Depth() <= maxDepth;
                 }, rootFilter);
@@ -48,6 +49,7 @@ namespace Grapht.Entity {
         /// </summary>
         public static VictoryCondition SameSumBranch() {
             return new VictoryCondition(
+                "All branches have the same sum",
                 delegate(IList<TreeNodeScript> leaves) {
                     return leaves.Select(leaf => leaf.BranchValue()).Distinct().Count() == 1;
                 }, allBranchFilter);
@@ -57,9 +59,11 @@ namespace Grapht.Entity {
         /// Return a Victory condition that all nodes must be on the same tree
         /// </summary>
         public static VictoryCondition SingleTree() {
-            return new VictoryCondition(delegate(IList<TreeNodeScript> nodes) {
-                return nodes.Select(node => node.Root()).Distinct().Count() == 1;
-            }, allNodesFilter);
+            return new VictoryCondition(
+                "All nodes on a single tree",
+                delegate(IList<TreeNodeScript> nodes) {
+                    return nodes.Select(node => node.Root()).Distinct().Count() == 1;
+                }, allNodesFilter);
         }
 
         /// <summary>
