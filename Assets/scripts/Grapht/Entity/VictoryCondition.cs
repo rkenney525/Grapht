@@ -43,6 +43,7 @@ namespace Grapht.Entity {
         /// <param name="rule">The rule logic</param>
         /// <param name="filter">The filter logic</param>
         public VictoryCondition(string Title, Rule rule, Filter filter) {
+            this.Title = Title;
             this.rule = rule;
             this.filter = filter;
         }

@@ -38,7 +38,7 @@ namespace Grapht.Entity {
         /// <returns>The specified Victory condition</returns>
         public static VictoryCondition MaximumDepth(int maxDepth) {
             return new VictoryCondition(
-                string.Format("Max depth of %s nodes", maxDepth),
+                string.Format("Max depth of {0} nodes", maxDepth),
                 delegate(IList<TreeNodeScript> root) {
                     return root.First().Depth() <= maxDepth;
                 }, rootFilter);

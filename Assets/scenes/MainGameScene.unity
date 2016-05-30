@@ -285,7 +285,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 200073272}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -309,6 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4ee14015819c74d913bdb27070c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VictoryConditionEntryRef: {fileID: 129364, guid: 8fa9cade0ebfade4986de5a0239a8160,
+    type: 2}
 --- !u!1 &210014453
 GameObject:
   m_ObjectHideFlags: 0
