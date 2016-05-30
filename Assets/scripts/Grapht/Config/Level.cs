@@ -1,4 +1,5 @@
-﻿using Grapht.Exception;
+﻿using Grapht.Entity;
+using Grapht.Exception;
 using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,7 @@ namespace Grapht.Config {
         /// <summary>
         /// Victory conditions for the root of the graph
         /// </summary>
-        public IList<RootCondition> RootConditions;
-
-        /// <summary>
-        /// Victory conditions for all branches in the graph
-        /// </summary>
-        public IList<TreeCondition> BranchConditions;
-
-        /// <summary>
-        /// Victory conditions for all nodes in the graph
-        /// </summary>
-        public IList<TreeCondition> GlobalConditions;
+        public IList<VictoryCondition> Rules;
 
         /// <summary>
         /// Create a Level instance from a JSONNode
@@ -42,9 +33,7 @@ namespace Grapht.Config {
             Level obj = new Level();
             obj.Id = levelNode["id"].AsInt;
             obj.Nodes = levelNode["nodes"].AsArray.Childs.Select(node => Node.Parse(node)).ToList();
-            obj.RootConditions = levelNode["rootConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseRootCondition(rule)).ToList();
-            obj.BranchConditions = levelNode["branchConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseTreeCondition(rule)).ToList();
-            obj.GlobalConditions = levelNode["globalConditions"].AsArray.Childs.Select(rule => VictoryConditions.ParseTreeCondition(rule)).ToList();
+            obj.Rules = levelNode["rules"].AsArray.Childs.Select(rule => VictoryConditions.ParseVictoryCondition(rule)).ToList();
             return obj;
         }
     }

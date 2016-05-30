@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Grapht.Config;
 using System.Collections;
+using Grapht.Entity;
 
 /// <summary>
 /// Checks if the victory conditions for the game have been met, when invoked.
@@ -15,19 +16,9 @@ public class VictoryWatcherScript : MonoBehaviour {
     private IList<TreeNodeScript> nodes;
 
     /// <summary>
-    /// Victory conditions for the root of the graph
+    /// Victory conditions for the level
     /// </summary>
-    private IList<RootCondition> rootConditions;
-
-    /// <summary>
-    /// Victory conditions for all branches in the graph
-    /// </summary>
-    private IList<TreeCondition> branchConditions;
-
-    /// <summary>
-    /// Victory conditions for all nodes in the graph
-    /// </summary>
-    private IList<TreeCondition> globalConditions;
+    private IList<VictoryCondition> victoryConditions;
 
     /// <summary>
     /// The state manager for the game
@@ -52,24 +43,15 @@ public class VictoryWatcherScript : MonoBehaviour {
     /// <param name="level">The level configuration to use</param>
     public void LoadLevel(Level level) {
         nodes = FindObjectsOfType<TreeNodeScript>();
-        rootConditions = level.RootConditions;
-        branchConditions = level.BranchConditions;
-        globalConditions = level.GlobalConditions;
+        victoryConditions = level.Rules;
     }
 
     /// <summary>
-    /// Check if all victory conditions have been met. All nodes must be in a single tree, and all branches in that tree must have the same sum
+    /// Check if all victory conditions for the level have been met
     /// </summary>
     public void CheckVictory() {
-        // First check the global conditions
-        if (globalConditions.All(check => check(nodes))) {
-            // Then check branch conditions
-            if (branchConditions.All(check => check(nodes.Where(node => node.IsLeaf()).ToList()))) {
-                // And finally handle the root
-                if (rootConditions.All(check => check(nodes.First().Root()))) {
-                    StartCoroutine(HandleVictoryWithDelay());
-                }
-            }
+        if (victoryConditions.All(rule => rule.Apply(nodes))) {
+            StartCoroutine(HandleVictoryWithDelay());
         }
     }
 
