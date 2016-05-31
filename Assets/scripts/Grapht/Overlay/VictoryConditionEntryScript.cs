@@ -29,6 +29,16 @@ namespace Grapht.Overlay {
         private const string UNMET_TEXT = "Unmet";
 
         /// <summary>
+        /// The color to display the met text
+        /// </summary>
+        private readonly Color MET_COLOR = Color.green;
+
+        /// <summary>
+        /// The color to display the unmet text
+        /// </summary>
+        private readonly Color UNMET_COLOR = Color.red;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="position">The location this entry should go</param>
@@ -53,6 +63,7 @@ namespace Grapht.Overlay {
         /// <param name="isMet">Whether the condition has been met</param>
         public void UpdateIsMet(bool isMet) {
             met.text = isMet ? MET_TEXT : UNMET_TEXT;
+            met.color = isMet ? MET_COLOR : UNMET_COLOR;
         }
     }
 }
