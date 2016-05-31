@@ -58,7 +58,15 @@ public class VictoryWatcherScript : MonoBehaviour {
     /// Check if all victory conditions for the level have been met
     /// </summary>
     public void CheckVictory() {
-        if (victoryConditions.All(rule => overlay.UpdateCondition(rule, rule.Apply(nodes)))) {
+        // Update the UI and check for victory
+        bool victory = true;
+        victoryConditions.All(rule => {
+            victory &= overlay.UpdateCondition(rule, rule.Apply(nodes));
+            return true;
+        });
+
+        // Handle a victory
+        if (victory) {
             StartCoroutine(HandleVictoryWithDelay());
         }
     }

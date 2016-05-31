@@ -75,7 +75,7 @@ namespace Grapht.Overlay {
         /// </summary>
         private void Clear() {
             rules.Select(set => set.Value).All(txt => {
-                GameObject.Destroy(txt);
+                GameObject.Destroy(txt.gameObject);
                 return true;
             });
             rules.Clear();
