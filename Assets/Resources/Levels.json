@@ -51,18 +51,14 @@
                 ]
             }
         ],
-        "rootConditions": [
+        "rules": [
             {
                 "name": "MaxDepth",
                 "arg": 3
-            }
-        ],
-        "branchConditions": [
+            },
             {
                 "name": "SameSumBranch"
-            }
-        ],
-        "globalConditions": [
+            },
             {
                 "name": "SingleTree"
             }
@@ -120,18 +116,14 @@
                 ]
             }
         ],
-        "rootConditions": [
+        "rules": [
             {
                 "name": "MaxDepth",
                 "arg": 4
-            }
-        ],
-        "branchConditions": [
+            },
             {
                 "name": "SameSumBranch"
-            }
-        ],
-        "globalConditions": [
+            },
             {
                 "name": "SingleTree"
             }
