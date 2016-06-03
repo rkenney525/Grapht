@@ -36,7 +36,8 @@ namespace Grapht.Overlay {
         /// Update the overlay to display the current set of victory conditions
         /// </summary>
         /// <param name="conditions">The current set of victory conditions in the game</param>
-        public void LoadConditions(IList<VictoryCondition> conditions) {
+        /// <param name="nodes">The current list of nodes in the world</param>
+        public void LoadConditions(IList<VictoryCondition> conditions, IList<TreeNodeScript> nodes) {
             // Empty the current dictionary
             Clear();
 
@@ -50,8 +51,7 @@ namespace Grapht.Overlay {
 
                 // Get the script reference and set it up
                 VictoryConditionEntryScript entry = entryObj.GetComponent<VictoryConditionEntryScript>();
-                // TODO actually get this value
-                entry.Load(position, condition.Title, false);
+                entry.Load(position, condition.Title, condition.Apply(nodes));
 
                 // Store it in the dictionary
                 rules.Add(condition, entry);
