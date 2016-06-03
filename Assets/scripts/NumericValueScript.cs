@@ -14,7 +14,7 @@ public class NumericValueScript : MonoBehaviour {
     /// <summary>
     /// Get the Text field when this component is created
     /// </summary>
-	public void SetUp () {
+	void Awake () {
         text = GetComponentInChildren<Text>();
 	}
 

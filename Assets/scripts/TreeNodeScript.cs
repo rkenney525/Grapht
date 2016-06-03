@@ -57,7 +57,7 @@ public class TreeNodeScript : MonoBehaviour {
     /// <summary>
     /// Get the NumericValueScript and other properties when the component is created
     /// </summary>
-    void Start() {
+    void Awake() {
         this.value = this.GetComponent<NumericValueScript>();
         this.width = SINGLE_NODE_WIDTH;
     }

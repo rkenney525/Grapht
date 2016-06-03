@@ -88,7 +88,6 @@ public class LevelLoaderScript : MonoBehaviour {
             // Get the prefab
             GameObject nodePrefab = Instantiate(
                 (node.NodeType == Node.Type.IMMOVEABLE) ? ImmoveableNodeRef : MoveableNodeRef);
-            SetUpPrefab(nodePrefab);
 
             // Add to the canvas
             nodePrefab.transform.parent = canvas.transform;
@@ -109,15 +108,6 @@ public class LevelLoaderScript : MonoBehaviour {
             // Return the prefab
             return nodePrefab;
         }).ToList();
-    }
-
-    /// <summary>
-    /// Load components that might not have been loaded during instantiate
-    /// TODO replace this with a more streamlined system
-    /// </summary>
-    /// <param name="nodePrefab">The prefab to instantiate</param>
-    private void SetUpPrefab(GameObject nodePrefab) {
-        nodePrefab.GetComponent<NumericValueScript>().SetUp();
     }
 
     /// <summary>
