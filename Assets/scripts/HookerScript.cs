@@ -21,7 +21,7 @@ public class HookerScript : MonoBehaviour {
     /// <summary>
     /// Load the TreeScriptNode reference and set other properties when this component is created
     /// </summary>
-    void Start() {
+    void Awake() {
         node = this.GetComponent<TreeNodeScript>();
     }
 

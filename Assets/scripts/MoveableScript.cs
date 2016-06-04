@@ -31,7 +31,7 @@ public class MoveableScript : MonoBehaviour {
     /// <summary>
     /// Load all internal and external references when this component is created
     /// </summary>
-	void Start () {
+	void Awake () {
         this.selected = false;
         this.rigidBody = this.GetComponent<Rigidbody2D>();
         this.hooker = this.GetComponent<HookerScript>();

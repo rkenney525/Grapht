@@ -39,7 +39,7 @@ public class VictoryWatcherScript : MonoBehaviour {
     /// <summary>
     /// Load references when the component is created
     /// </summary>
-    void Start() {
+    void Awake() {
         stateManager = GameObject.Find("StateManager").GetComponent<StateManagerScript>();
         overlay = GameObject.Find("Rules").GetComponent<VictoryConditionOverlayScript>();
     }
@@ -51,7 +51,7 @@ public class VictoryWatcherScript : MonoBehaviour {
     public void LoadLevel(Level level) {
         nodes = FindObjectsOfType<TreeNodeScript>();
         victoryConditions = level.Rules;
-        overlay.LoadConditions(victoryConditions);
+        overlay.LoadConditions(victoryConditions, nodes);
     }
 
     /// <summary>
