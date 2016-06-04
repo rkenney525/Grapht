@@ -1,21 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Grapht.Entity;
 
 /// <summary>
 /// Controls zooming and panning while in the main game mode
 /// </summary>
 public class CameraControlScript : MonoBehaviour {
-
-    /// <summary>
-    /// The largest orthographic size the Camera can attain
-    /// </summary>
-    private const float MAX_ZOOM = 15f;
-
-    /// <summary>
-    /// The smallest orthographic size the Camera can attain
-    /// </summary>
-    private const float MIN_ZOOM = 2f;
-
     /// <summary>
     /// The change in orthagraphic size per zoom action
     /// </summary>
@@ -25,26 +15,6 @@ public class CameraControlScript : MonoBehaviour {
     /// The mouse button used to control panning
     /// </summary>
     private const int PANNING_BUTTON = 1;
-
-    /// <summary>
-    /// The farthest up the camera can display, set to a fully zoomed out view
-    /// </summary>
-    private const float WORLD_LIMIT_TOP = MAX_ZOOM;
-
-    /// <summary>
-    /// The farthest down the camera can display, set to a fully zoomed out view
-    /// </summary>
-    private const float WORLD_LIMIT_BOTTOM = -MAX_ZOOM;
-
-    /// <summary>
-    /// The farthest left the camera can display, set to a fully zoomed out view
-    /// </summary>
-    private float WORLD_LIMIT_LEFT;
-
-    /// <summary>
-    /// The farthest right the camera can display, set to a fully zoomed out view
-    /// </summary>
-    private float WORLD_LIMIT_RIGHT;
 
     /// <summary>
     /// Reference to the main Camera in the Scene
@@ -60,8 +30,6 @@ public class CameraControlScript : MonoBehaviour {
     /// Load the Camera reference and other properties when this component is created
     /// </summary>
     void Start() {
-        WORLD_LIMIT_LEFT = WORLD_LIMIT_BOTTOM * (Screen.width / Screen.height);
-        WORLD_LIMIT_RIGHT = WORLD_LIMIT_TOP * (Screen.width / Screen.height);
         this.cam = this.GetComponent<Camera>();
         this.previousMousePosition = Vector3.zero;
     }
@@ -113,7 +81,7 @@ public class CameraControlScript : MonoBehaviour {
         float newZoom = this.cam.orthographicSize + zoomChange;
 
         // Apply the min and max
-        newZoom = this.ApplyBounds(newZoom, MAX_ZOOM, MIN_ZOOM);
+        newZoom = this.ApplyBounds(newZoom, ViewProperties.MAX_ZOOM, ViewProperties.MIN_ZOOM);
 
         // Set the zoom
         this.cam.orthographicSize = newZoom;
@@ -129,11 +97,11 @@ public class CameraControlScript : MonoBehaviour {
     private Vector3 BoundCameraPosition(Vector3 position) {
         // Get the view limits based on the zoom
         float verticalView = this.cam.orthographicSize;
-        float horizontalView = verticalView * (Screen.width / Screen.height);
+        float horizontalView = verticalView * ViewProperties.SCREEN_RATIO;
 
         // Bound the position based on the zoom
-        position.x = this.ApplyBounds(position.x, WORLD_LIMIT_RIGHT - horizontalView, WORLD_LIMIT_LEFT + horizontalView);
-        position.y = this.ApplyBounds(position.y, WORLD_LIMIT_TOP - verticalView, WORLD_LIMIT_BOTTOM + verticalView);
+        position.x = this.ApplyBounds(position.x, ViewProperties.WORLD_LIMIT_RIGHT - horizontalView, ViewProperties.WORLD_LIMIT_LEFT + horizontalView);
+        position.y = this.ApplyBounds(position.y, ViewProperties.WORLD_LIMIT_TOP - verticalView, ViewProperties.WORLD_LIMIT_BOTTOM + verticalView);
         
         // Return the position
         return position;

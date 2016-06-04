@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Grapht.Component;
 
 /// <summary>
 /// Manage interactivity of the game via states
@@ -33,6 +34,11 @@ public class StateManagerScript : MonoBehaviour {
     private Canvas menuCanvas;
 
     /// <summary>
+    /// Background sprite for the main menu
+    /// </summary>
+    private SpriteRenderer menuBackground;
+
+    /// <summary>
     /// Canvas for the victory overlay
     /// </summary>
     private Canvas victoryCanvas;
@@ -41,6 +47,11 @@ public class StateManagerScript : MonoBehaviour {
     /// Canvas for the game overlay
     /// </summary>
     private Canvas gameOverlayCanvas;
+
+    /// <summary>
+    /// Overlay script that draws grid squares
+    /// </summary>
+    private GridOverlayScript gridOverlayScript;
 
     /// <summary>
     /// The button for the next level on the victory overlay
@@ -53,7 +64,9 @@ public class StateManagerScript : MonoBehaviour {
     void Start() {
         cameraControls = FindObjectOfType<CameraControlScript>();
         menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
+        menuBackground = GameObject.Find("MenuBackground").GetComponent<SpriteRenderer>();
         victoryCanvas = GameObject.Find("Victory").GetComponent<Canvas>();
+        gridOverlayScript = FindObjectOfType<GridOverlayScript>();
         gameOverlayCanvas = GameObject.Find("Rules").GetComponent<Canvas>();
         nextLevelButton = GameObject.Find("Next Level Button").GetComponent<Button>();
         loader = FindObjectOfType<LevelLoaderScript>();
@@ -85,24 +98,30 @@ public class StateManagerScript : MonoBehaviour {
         switch (currentState) {
             case State.MAIN_MENU:
                 loader.ClearStage();
+                gridOverlayScript.EraseGrid();
                 gameOverlayCanvas.enabled = false;
                 victoryCanvas.enabled = false;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = true;
+                menuBackground.enabled = true;
                 break;
             case State.GAME:
                 loader.LoadCurrentLevel();
+                gridOverlayScript.DrawGrid();
                 gameOverlayCanvas.enabled = true;
                 victoryCanvas.enabled = false;
                 cameraControls.enabled = true;
                 menuCanvas.enabled = false;
+                menuBackground.enabled = false;
                 break;
             case State.VICTORY:
                 loader.ClearStage();
+                gridOverlayScript.EraseGrid();
                 gameOverlayCanvas.enabled = false;
                 victoryCanvas.enabled = true;
                 cameraControls.enabled = false;
                 menuCanvas.enabled = false;
+                menuBackground.enabled = false;
                 nextLevelButton.interactable = loader.HasNextLevel();
                 break;
             case State.QUITTING:
