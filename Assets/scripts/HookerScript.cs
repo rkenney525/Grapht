@@ -41,7 +41,7 @@ public class HookerScript : MonoBehaviour {
     /// <param name="other">The triggered node</param>
     void OnTriggerEnter2D(Collider2D other) {
         TreeNodeScript parent = other.GetComponent<TreeNodeScript>();
-        if (!parent.HasParent(node)) {
+        if (!parent.HasParent(node) && parent.CanAcceptConnection()) {
             connectables.Add(parent);
         }
     }
