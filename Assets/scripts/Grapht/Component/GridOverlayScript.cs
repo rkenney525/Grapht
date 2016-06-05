@@ -6,6 +6,7 @@ using Grapht.Entity;
 using Grapht.Arch;
 
 namespace Grapht.Component {
+
     /// <summary>
     /// Script responsible for drawing grid squares on the screen
     /// </summary>
