@@ -278,10 +278,6 @@
         ],
         "rules": [
             {
-                "name": "MaxDepth",
-                "arg": 4
-            },
-            {
                 "name": "SameSumBranch"
             },
             {
@@ -372,7 +368,7 @@
         "rules": [
             {
                 "name": "MaxDepth",
-                "arg": 5
+                "arg": 7
             },
             {
                 "name": "SameSumBranch"
