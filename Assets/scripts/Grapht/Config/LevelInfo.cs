@@ -1,4 +1,4 @@
-﻿using Grapht.Entity;
+﻿using Grapht.Component.Victory;
 using Grapht.Exception;
 using SimpleJSON;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Grapht.Config {
     /// <summary>
     /// Data relating to an individual level
     /// </summary>
-    public class Level {
+    public class LevelInfo {
         /// <summary>
         /// The level identifier
         /// </summary>
@@ -17,7 +17,7 @@ namespace Grapht.Config {
         /// <summary>
         /// All individually placed nodes
         /// </summary>
-        public IList<Node> Nodes;
+        public IList<NodeInfo> Nodes;
 
         /// <summary>
         /// Victory conditions for the root of the graph
@@ -29,10 +29,10 @@ namespace Grapht.Config {
         /// </summary>
         /// <param name="levelNode">The json to parse</param>
         /// <returns>A Level object represented by the provided json</returns>
-        public static Level Parse(JSONNode levelNode) {
-            Level obj = new Level();
+        public static LevelInfo Parse(JSONNode levelNode) {
+            LevelInfo obj = new LevelInfo();
             obj.Id = levelNode["id"].AsInt;
-            obj.Nodes = levelNode["nodes"].AsArray.Childs.Select(node => Node.Parse(node)).ToList();
+            obj.Nodes = levelNode["nodes"].AsArray.Childs.Select(node => NodeInfo.Parse(node)).ToList();
             obj.Rules = levelNode["rules"].AsArray.Childs.Select(rule => VictoryConditions.ParseVictoryCondition(rule)).ToList();
             return obj;
         }

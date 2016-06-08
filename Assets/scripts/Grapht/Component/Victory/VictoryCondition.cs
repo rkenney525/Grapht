@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Grapht.Node;
 
-namespace Grapht.Entity {
+namespace Grapht.Component.Victory {
     /// <summary>
     /// A rule for victory, and all associated data
     /// </summary>

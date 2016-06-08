@@ -1,9 +1,10 @@
 ﻿using Grapht.Exception;
+using Grapht.Node;
 using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Grapht.Entity {
+namespace Grapht.Component.Victory {
     /// <summary>
     /// A set of victory conditions and victory condition creators
     /// </summary>

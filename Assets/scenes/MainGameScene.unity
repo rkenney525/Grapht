@@ -306,7 +306,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 200073272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4ee14015819c74d913bdb27070c909, type: 3}
+  m_Script: {fileID: 11500000, guid: afcff863a2803124fa15155a4e27c8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   VictoryConditionEntryRef: {fileID: 129364, guid: 8fa9cade0ebfade4986de5a0239a8160,

@@ -7,7 +7,7 @@ namespace Grapht.Config {
     /// <summary>
     /// Represents data for a node on the graph
     /// </summary>
-    public class Node {
+    public class NodeInfo {
         /// <summary>
         /// Either a Moveable or Immoveable node
         /// </summary>
@@ -31,15 +31,15 @@ namespace Grapht.Config {
         /// <summary>
         /// The children this node has
         /// </summary>
-        public IList<Node> Children;
+        public IList<NodeInfo> Children;
 
         /// <summary>
         /// Create a Node instance from a JSONNode
         /// </summary>
         /// <param name="nodeObj">The json to parse</param>
         /// <returns>A Node object represented by the provided json</returns>
-        public static Node Parse(JSONNode nodeObj) {
-            Node node = new Node();
+        public static NodeInfo Parse(JSONNode nodeObj) {
+            NodeInfo node = new NodeInfo();
             if (nodeObj["pos"] != null) {
                 node.Position = new Vector2(nodeObj["pos"]["x"].AsFloat, nodeObj["pos"]["y"].AsFloat);
             }

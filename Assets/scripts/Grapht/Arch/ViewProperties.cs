@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Grapht.Entity {
+namespace Grapht.Arch {
     /// <summary>
     /// Static properties relating to how the game is viewed
     /// </summary>

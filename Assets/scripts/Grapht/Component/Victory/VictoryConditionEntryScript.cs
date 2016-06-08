@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-namespace Grapht.Overlay {
+namespace Grapht.Component.Victory {
     /// <summary>
     /// Controls a UI entry for a victory condition
     /// </summary>

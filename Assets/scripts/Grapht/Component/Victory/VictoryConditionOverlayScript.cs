@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Grapht.Entity;
 using UnityEngine.UI;
 using System.Linq;
+using Grapht.Node;
 
-namespace Grapht.Overlay {
+namespace Grapht.Component.Victory {
     /// <summary>
     /// Control the placement and display of all rules
     /// </summary>

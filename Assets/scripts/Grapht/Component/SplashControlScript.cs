@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Grapht.Splash {
+namespace Grapht.Component {
     /// <summary>
     /// Displays the Splash Screen and then loads the main menu
     /// </summary>
