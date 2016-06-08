@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Grapht.Entity;
 using Grapht.Arch;
 
 namespace Grapht.Component {
