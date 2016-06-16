@@ -55,12 +55,15 @@ namespace Grapht.Node {
         /// </summary>
         private float width;
 
+        private ValueDisplayScript branchTotalDisplay;
+
         /// <summary>
         /// Get the NumericValueScript and other properties when the component is created
         /// </summary>
         void Awake() {
             this.value = this.GetComponent<NumericValueScript>();
             this.width = SINGLE_NODE_WIDTH;
+            this.branchTotalDisplay = GetComponentInChildren<ValueDisplayScript>();
         }
 
         /// <summary>
@@ -81,14 +84,15 @@ namespace Grapht.Node {
             childNode.ChangeParent(this);
 
             // Update angles
-            this.UpdateAnglesFromRoot();
+            this.UpdateTree();
         }
 
         /// <summary>
         /// Make this node an orphan
         /// </summary>
         public void Detach() {
-            this.ChangeParent(null);
+            ChangeParent(null);
+            UpdateTree();
         }
 
         /// <summary>
@@ -112,7 +116,7 @@ namespace Grapht.Node {
         public void LoseChild(TreeNodeScript childNode) {
             Destroy(this.children[childNode].gameObject);
             this.children.Remove(childNode);
-            this.UpdateAnglesFromRoot();
+            this.UpdateTree();
         }
 
         /// <summary>
@@ -161,12 +165,36 @@ namespace Grapht.Node {
         }
 
         /// <summary>
+        /// Update display attributes for the modified tree, to include the tree's width, angles of nodes, and the displayed branch value.
+        /// </summary>
+        private void UpdateTree() {
+            TreeNodeScript root = this.Root();
+            UpdateAnglesFromRoot(root);
+            root.UpdateBranchValueDisplay();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root">The node to check branch display for</param>
+        private void UpdateBranchValueDisplay() {
+            if (IsLeaf()) {
+                branchTotalDisplay.Display(BranchValue());
+            } else {
+                branchTotalDisplay.Disable();
+                children.Select(set => set.Key).All(child => {
+                    child.UpdateBranchValueDisplay();
+                    return true;
+                });
+            }
+        }
+
+        /// <summary>
         /// Update all angles starting from the top of the tree
         /// </summary>
-        private void UpdateAnglesFromRoot() {
+        private void UpdateAnglesFromRoot(TreeNodeScript root) {
             // Update the root and its children's widths
             // Note that this is slightly wasteful since we have to traverse the tree later anyway, but this is more explicit at least.
-            TreeNodeScript root = this.Root();
             root.UpdateWidth();
 
             // Update angles recursively
