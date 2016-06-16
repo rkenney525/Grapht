@@ -14,7 +14,7 @@ namespace Grapht.Component.Victory {
         /// Filter to get the root node of a graph
         /// </summary>
         private static VictoryCondition.Filter rootFilter = delegate(IList<TreeNodeScript> nodes) {
-            return nodes.Select(node => node.Root()).ToList();
+            return nodes.Select(node => node.Root()).Distinct().ToList();
         };
 
         /// <summary>
