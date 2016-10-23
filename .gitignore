@@ -11,3 +11,5 @@ Thumbs.db
 /Grapht.sln
 /.vs
 /Grapht.CSharp.Plugins.csproj
+/WebBuild
+/Grapht.CSharp.Editor.csproj
