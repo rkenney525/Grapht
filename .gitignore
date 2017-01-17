@@ -6,8 +6,8 @@ Thumbs.db
 /obj/Debug
 /Library
 /Temp
-/Grapht.v12.suo
-/Grapht.CSharp.csproj
-/Grapht.sln
-/.vs
-/Grapht.CSharp.Plugins.csproj
+*.v12.suo
+*.sln
+*.vs
+*.csproj
+/WebBuild
