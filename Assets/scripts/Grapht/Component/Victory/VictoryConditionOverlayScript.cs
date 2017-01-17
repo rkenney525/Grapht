@@ -17,7 +17,7 @@ namespace Grapht.Component.Victory {
         public GameObject VictoryConditionEntryRef;
 
         /// <summary>
-        /// The ehight of a particular entry. Easier to hardcode this than try to get at runtime
+        /// The height of a particular entry. Easier to hardcode this than try to get at runtime
         /// </summary>
         private float ENTRY_HEIGHT = 40.0f;
 
