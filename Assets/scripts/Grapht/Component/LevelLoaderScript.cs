@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Grapht.Config;
 using SimpleJSON;
 using Grapht.Node;
+using Grapht.Component.Hint;
 
 namespace Grapht.Component {
     /// <summary>
@@ -36,6 +37,11 @@ namespace Grapht.Component {
         private VictoryWatcherScript watcher;
 
         /// <summary>
+        /// The HintButtonScript responsible for loading hints
+        /// </summary>
+        private HintButtonScript hintButtonScript;
+
+        /// <summary>
         /// List of levels loaded by the game
         /// </summary>
         private IList<LevelInfo> levels;
@@ -51,6 +57,7 @@ namespace Grapht.Component {
         void Start() {
             canvas = GameObject.Find(CANVAS_OBJECT_NAME);
             watcher = FindObjectOfType<VictoryWatcherScript>();
+            hintButtonScript = FindObjectOfType<HintButtonScript>();
             // TODO load currentLevel from save data
             CurrentLevel = 1;
             levels = LoadLevels();
@@ -79,6 +86,9 @@ namespace Grapht.Component {
 
             // Configure the victory conditions
             watcher.LoadLevel(level);
+
+            // Load the hints
+            hintButtonScript.LoadHintEntries(level.Hints);
         }
 
         /// <summary>
