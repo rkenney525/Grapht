@@ -62,6 +62,12 @@
             {
                 "name": "SingleTree"
             }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 90
+            }
         ]
     },
     {
@@ -126,6 +132,12 @@
             },
             {
                 "name": "SingleTree"
+            }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 50
             }
         ]
     },
@@ -203,6 +215,12 @@
             },
             {
                 "name": "SingleTree"
+            }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 60
             }
         ]
     },
@@ -282,6 +300,12 @@
             },
             {
                 "name": "SingleTree"
+            }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 26
             }
         ]
     },
@@ -375,6 +399,12 @@
             },
             {
                 "name": "SingleTree"
+            }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 11
             }
         ]
     }
