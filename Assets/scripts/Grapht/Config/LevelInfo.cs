@@ -1,5 +1,5 @@
 ﻿using Grapht.Component.Victory;
-using Grapht.Exception;
+using Grapht.Component.Hint;
 using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,11 @@ namespace Grapht.Config {
         public IList<VictoryCondition> Rules;
 
         /// <summary>
+        /// Any hints to the solution
+        /// </summary>
+        public IList<string> Hints;
+
+        /// <summary>
         /// Create a Level instance from a JSONNode
         /// </summary>
         /// <param name="levelNode">The json to parse</param>
@@ -34,6 +39,7 @@ namespace Grapht.Config {
             obj.Id = levelNode["id"].AsInt;
             obj.Nodes = levelNode["nodes"].AsArray.Childs.Select(node => NodeInfo.Parse(node)).ToList();
             obj.Rules = levelNode["rules"].AsArray.Childs.Select(rule => VictoryConditions.ParseVictoryCondition(rule)).ToList();
+            obj.Hints = levelNode["hints"].AsArray.Childs.Select(hint => HintFactory.ParseHint(hint)).ToList();
             return obj;
         }
     }
