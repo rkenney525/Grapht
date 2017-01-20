@@ -5,5 +5,8 @@
   "owners": [ "rkenney525" ],
   "projectUrl": "https://bitbucket.org/diddies/grapht",
   "requireLicenseAcceptance": false,
-  "summary": "A puzzle game of math and trees."
+  "summary": "A puzzle game of math and trees.",
+  "frameworks": {
+    "netcore35": {}
+  }
 }
