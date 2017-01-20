@@ -1,0 +1,9 @@
+{
+  "name": "Grapht-NuGet",
+  "version": "1.0.0",
+  "authors": [ "rkenney525" ],
+  "owners": [ "rkenney525" ],
+  "projectUrl": "https://bitbucket.org/diddies/grapht",
+  "requireLicenseAcceptance": false,
+  "summary": "A puzzle game of math and trees."
+}
