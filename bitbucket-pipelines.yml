@@ -10,5 +10,5 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
 #          - dotnet restore
-          - dotnet build Grapht.CSharp
-          - dotnet test GraphtScriptTests
+          - dotnet build
+          - dotnet test
