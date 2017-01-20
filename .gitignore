@@ -8,7 +8,5 @@ Thumbs.db
 /Library
 /Temp
 *.v12.suo
-*.sln
 *.vs
-*.csproj
 /WebBuild

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapht.CSharp.Plugins", "Grapht.CSharp.Plugins.csproj", "{179C9D02-5904-FA22-E72C-D2137F47E9EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapht.CSharp", "Grapht.CSharp.csproj", "{64D70F85-144D-3D74-D474-4EFB1578E30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grapht.CSharp.Editor", "Grapht.CSharp.Editor.csproj", "{703394B3-6A66-B8C4-425D-1877B61FFEED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphtScriptTests", "GraphtScriptTests.csproj", "{B8C45D13-5319-4283-8992-A4E3F8ABE2E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{179C9D02-5904-FA22-E72C-D2137F47E9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179C9D02-5904-FA22-E72C-D2137F47E9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179C9D02-5904-FA22-E72C-D2137F47E9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179C9D02-5904-FA22-E72C-D2137F47E9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D70F85-144D-3D74-D474-4EFB1578E30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D70F85-144D-3D74-D474-4EFB1578E30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D70F85-144D-3D74-D474-4EFB1578E30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D70F85-144D-3D74-D474-4EFB1578E30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{703394B3-6A66-B8C4-425D-1877B61FFEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703394B3-6A66-B8C4-425D-1877B61FFEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703394B3-6A66-B8C4-425D-1877B61FFEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703394B3-6A66-B8C4-425D-1877B61FFEED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C45D13-5319-4283-8992-A4E3F8ABE2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C45D13-5319-4283-8992-A4E3F8ABE2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C45D13-5319-4283-8992-A4E3F8ABE2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C45D13-5319-4283-8992-A4E3F8ABE2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
