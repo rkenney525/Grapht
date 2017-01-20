@@ -39,14 +39,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\Grapht\Arch\FloatRangeExtensionTests.cs" />
+    <Compile Include="Tests\Grapht\Arch\TupleTests.cs" />
+    <Compile Include="Tests\Grapht\Component\Hint\HintFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Grapht.CSharp.csproj">
-      <Project>{64d70f85-144d-3d74-d474-4efb1578e30f}</Project>
-      <Name>Grapht.CSharp</Name>
+    <ProjectReference Include="Grapht.csproj">
+      <Project>{437fb1eb-f2a0-7e18-8f8c-bb6267222195}</Project>
+      <Name>Grapht</Name>
+    </ProjectReference>
+    <ProjectReference Include="Grapht.Plugins.csproj">
+      <Project>{67e9a042-0beb-4d31-03b1-ff8a6d1fbede}</Project>
+      <Name>Grapht.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
