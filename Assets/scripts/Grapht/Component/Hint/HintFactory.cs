@@ -5,7 +5,7 @@ namespace Grapht.Component.Hint {
     /// <summary>
     /// Houses all logic for generating the hint content from json.
     /// </summary>
-    class HintFactory {
+    public class HintFactory {
         private static string BranchSize(int size) {
             return string.Format("Try a branch sum of {0}", size);
         }
