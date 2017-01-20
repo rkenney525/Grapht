@@ -11,10 +11,10 @@
   "frameworks": {
     "netcore35": {
       "dependencies": {
-        "Grapht.CSharp": "*",
-        "Grapht.CSharp.Editor": "*",
-        "Grapht.CSharp.Plugins": "*",
-        "GraphtScriptTests": "*"
+        "Boo.Lang": "2.0.9.5",
+        "mscorlib": "2.0.0.0",
+        "System": "2.0.0.0",
+        "System.Core": "3.5.0.0",
       }
     }
   }
