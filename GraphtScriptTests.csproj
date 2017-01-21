@@ -41,6 +41,7 @@
     <Compile Include="Tests\Grapht\Arch\FloatRangeExtensionTests.cs" />
     <Compile Include="Tests\Grapht\Arch\TupleTests.cs" />
     <Compile Include="Tests\Grapht\Component\Hint\HintFactoryTests.cs" />
+    <Compile Include="Tests\Grapht\Component\Victory\VictoryConditionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

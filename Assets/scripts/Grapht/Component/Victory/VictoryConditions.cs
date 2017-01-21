@@ -37,7 +37,7 @@ namespace Grapht.Component.Victory {
         /// </summary>
         /// <param name="maxDepth">The max depth that root cannot exceed</param>
         /// <returns>The specified Victory condition</returns>
-        public static VictoryCondition MaximumDepth(int maxDepth) {
+        private static VictoryCondition MaximumDepth(int maxDepth) {
             return new VictoryCondition(
                 string.Format("Max depth of {0} nodes", maxDepth),
                 delegate(IList<TreeNodeScript> root) {
@@ -48,7 +48,7 @@ namespace Grapht.Component.Victory {
         /// <summary>
         /// Return a Victory condition that all branches must have the same sum
         /// </summary>
-        public static VictoryCondition SameSumBranch() {
+        private static VictoryCondition SameSumBranch() {
             return new VictoryCondition(
                 "All branches have the same sum",
                 delegate(IList<TreeNodeScript> leaves) {
@@ -59,7 +59,7 @@ namespace Grapht.Component.Victory {
         /// <summary>
         /// Return a Victory condition that all nodes must be on the same tree
         /// </summary>
-        public static VictoryCondition SingleTree() {
+        private static VictoryCondition SingleTree() {
             return new VictoryCondition(
                 "All nodes on a single tree",
                 delegate(IList<TreeNodeScript> nodes) {
