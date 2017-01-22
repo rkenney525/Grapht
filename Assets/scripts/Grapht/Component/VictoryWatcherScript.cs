@@ -60,11 +60,7 @@ namespace Grapht.Component {
         /// </summary>
         public void CheckVictory() {
             // Update the UI and check for victory
-            bool victory = true;
-            victoryConditions.All(rule => {
-                victory &= overlay.UpdateCondition(rule, rule.Apply(nodes));
-                return true;
-            });
+            bool victory = victoryConditions.All(rule => overlay.UpdateCondition(rule, rule.Apply(nodes)));
 
             // Handle a victory
             if (victory) {

@@ -11,26 +11,34 @@ namespace Grapht.Component.Victory {
     public class VictoryConditions {
 
         /// <summary>
-        /// Filter to get the root node of a graph
+        /// Filter to get the root of each tree
         /// </summary>
-        private static VictoryCondition.Filter rootFilter = delegate(IList<TreeNodeScript> nodes) {
+        private static VictoryCondition.Filter rootFilter = delegate (IList<TreeNodeScript> nodes) {
             return nodes.Select(node => node.Root()).Distinct().ToList();
         };
 
         /// <summary>
-        /// Filter to get all unique branches
-        /// TODO get branches per tree
+        /// Filter to get all unique branches, across trees
         /// </summary>
-        private static VictoryCondition.Filter allBranchFilter = delegate(IList<TreeNodeScript> nodes) {
+        private static VictoryCondition.Filter allBranchFilter = delegate (IList<TreeNodeScript> nodes) {
             return nodes.Where(node => node.IsLeaf()).ToList();
         };
 
         /// <summary>
         /// Filter to return all nodes
         /// </summary>
-        private static VictoryCondition.Filter allNodesFilter = delegate(IList<TreeNodeScript> nodes) {
+        private static VictoryCondition.Filter allNodesFilter = delegate (IList<TreeNodeScript> nodes) {
             return nodes;
         };
+
+        /// <summary>
+        /// Retrieve a Mapping of branches to their tree's root
+        /// </summary>
+        /// <param name="nodes">All nodes on the graph</param>
+        /// <returns>A grouping of all leaves to their corresponding root</returns>
+        private static IEnumerable<IGrouping<TreeNodeScript, TreeNodeScript>> allBranchesByTree(IList<TreeNodeScript> nodes) {
+            return allBranchFilter(nodes).GroupBy(node => node.Root());
+        }
 
         /// <summary>
         /// Return a Victory condition that the max depth cannot exceed the provided max depth.
@@ -40,9 +48,22 @@ namespace Grapht.Component.Victory {
         private static VictoryCondition MaximumDepth(int maxDepth) {
             return new VictoryCondition(
                 string.Format("Max depth of {0} nodes", maxDepth),
-                delegate(IList<TreeNodeScript> root) {
+                delegate (IList<TreeNodeScript> root) {
                     return root.First().Depth() <= maxDepth;
                 }, rootFilter);
+        }
+
+        /// <summary>
+        /// Return a VictoryCondition that says all branches on the same tree have to have the same sum.
+        /// </summary>
+        /// <returns>The specified Victory condition</returns>
+        private static VictoryCondition SameSumBranchPerTree() {
+            return new VictoryCondition(
+                "All branches on the same tree have the same sum",
+                delegate (IList<TreeNodeScript> nodes) {
+                    return allBranchesByTree(nodes)
+                    .All(group => group.Select(leaf => leaf.BranchValue()).Distinct().Count() == 1);
+                }, allNodesFilter);
         }
 
         /// <summary>
@@ -51,7 +72,7 @@ namespace Grapht.Component.Victory {
         private static VictoryCondition SameSumBranch() {
             return new VictoryCondition(
                 "All branches have the same sum",
-                delegate(IList<TreeNodeScript> leaves) {
+                delegate (IList<TreeNodeScript> leaves) {
                     return leaves.Select(leaf => leaf.BranchValue()).Distinct().Count() == 1;
                 }, allBranchFilter);
         }
@@ -62,8 +83,34 @@ namespace Grapht.Component.Victory {
         private static VictoryCondition SingleTree() {
             return new VictoryCondition(
                 "All nodes on a single tree",
-                delegate(IList<TreeNodeScript> nodes) {
+                delegate (IList<TreeNodeScript> nodes) {
                     return nodes.Select(node => node.Root()).Distinct().Count() == 1;
+                }, allNodesFilter);
+        }
+
+        /// <summary>
+        /// Return a VictoryCondition that makes sure there are no more than the specific number of trees
+        /// </summary>
+        /// <param name="num">The max number of tree</param>
+        /// <returns>The specified Victory condition</returns>
+        private static VictoryCondition NoMoreThanTrees(int num) {
+            return new VictoryCondition(
+                string.Format("No more than { 0 } trees", num),
+                delegate (IList<TreeNodeScript> nodes) {
+                    return nodes.Select(node => node.Root()).Distinct().Count() <= num;
+                }, allNodesFilter);
+        }
+
+        /// <summary>
+        /// Return a VictoryCondition that makes sure there are no less than the specific number of trees
+        /// </summary>
+        /// <param name="num">The min number of tree</param>
+        /// <returns>The specified Victory condition</returns>
+        private static VictoryCondition NoLessThanTrees(int num) {
+            return new VictoryCondition(
+                string.Format("No fewer than { 0 } trees", num),
+                delegate (IList<TreeNodeScript> nodes) {
+                    return nodes.Select(node => node.Root()).Distinct().Count() >= num;
                 }, allNodesFilter);
         }
 
@@ -80,6 +127,12 @@ namespace Grapht.Component.Victory {
                     return SameSumBranch();
                 case "SingleTree":
                     return SingleTree();
+                case "SameSumBranchPerTree":
+                    return SameSumBranchPerTree();
+                case "NoMoreThanThrees":
+                    return NoMoreThanTrees(json["arg"].AsInt);
+                case "NoLessThanThrees":
+                    return NoLessThanTrees(json["arg"].AsInt);
                 default:
                     throw new GraphtParsingException();
             }
