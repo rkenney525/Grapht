@@ -11,15 +11,14 @@ namespace Grapht.Component.Victory {
     public class VictoryConditions {
 
         /// <summary>
-        /// Filter to get the root node of a graph
+        /// Filter to get the root of each tree
         /// </summary>
         private static VictoryCondition.Filter rootFilter = delegate(IList<TreeNodeScript> nodes) {
             return nodes.Select(node => node.Root()).Distinct().ToList();
         };
 
         /// <summary>
-        /// Filter to get all unique branches
-        /// TODO get branches per tree
+        /// Filter to get all unique branches, across trees
         /// </summary>
         private static VictoryCondition.Filter allBranchFilter = delegate(IList<TreeNodeScript> nodes) {
             return nodes.Where(node => node.IsLeaf()).ToList();
@@ -31,6 +30,15 @@ namespace Grapht.Component.Victory {
         private static VictoryCondition.Filter allNodesFilter = delegate(IList<TreeNodeScript> nodes) {
             return nodes;
         };
+
+        /// <summary>
+        /// Retrieve a Mapping of branches to their tree's root
+        /// </summary>
+        /// <param name="nodes">All nodes on the graph</param>
+        /// <returns>A grouping of all leaves to their corresponding root</returns>
+        private static IEnumerable<IGrouping<TreeNodeScript, TreeNodeScript>> allBranchesByTree(IList<TreeNodeScript> nodes) {
+            return allBranchFilter(nodes).GroupBy(node => node.Root());
+        }
 
         /// <summary>
         /// Return a Victory condition that the max depth cannot exceed the provided max depth.
