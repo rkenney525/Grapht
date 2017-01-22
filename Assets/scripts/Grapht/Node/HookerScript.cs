@@ -31,7 +31,6 @@ namespace Grapht.Node {
         /// </summary>
         public void BeginListening() {
             if (node.ParentNode != null) {
-                connectables.Add(this.node.ParentNode);
                 node.Detach();
             }
         }
@@ -43,6 +42,7 @@ namespace Grapht.Node {
         void OnTriggerEnter2D(Collider2D other) {
             TreeNodeScript parent = other.GetComponent<TreeNodeScript>();
             if (!parent.HasParent(node) && parent.CanAcceptConnection()) {
+                // TODO highlight
                 connectables.Add(parent);
             }
         }
@@ -53,6 +53,7 @@ namespace Grapht.Node {
         /// <param name="other">The triggered node</param>
         void OnTriggerExit2D(Collider2D other) {
             TreeNodeScript parent = other.GetComponent<TreeNodeScript>();
+            // TODO remove highlight
             connectables.Remove(parent);
         }
 
