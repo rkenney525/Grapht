@@ -2,6 +2,6 @@
     /// <summary>
     /// Thrown when there is an error parsing Grapht JSON files
     /// </summary>
-    class GraphtParsingException : System.Exception {
+    public class GraphtParsingException : System.Exception {
     }
 }

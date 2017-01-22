@@ -3,11 +3,10 @@
 Thumbs.db
 /Grapht.userprefs
 /*_Data
-/obj/Debug
+/obj
+/bin
 /Library
 /Temp
 *.v12.suo
-*.sln
 *.vs
-*.csproj
 /WebBuild

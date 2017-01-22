@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Grapht.Exception;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Grapht.Arch {
     /// <summary>
@@ -24,7 +24,11 @@ namespace Grapht.Arch {
         /// <param name="step">The number to skip for each float</param>
         /// <returns>A sequence of floats in the specified range</returns>
         public static IEnumerable<float> Step(this Tuple<float, float> range, float step) {
-            for (float num = range._1; num <= range._2; num += step) {
+            // The range is bad if the step is 0 or if it wont increment towards the second number
+            if (step == 0 || !((range._1 - range._2 >= 0) ^ (step >= 0))) {
+                throw new BadRangeException();
+            }
+            for (float num = range._1; (range._1 < range._2) ? num <= range._2 : num >= range._2; num += step) {
                 yield return num;
             }
         }
