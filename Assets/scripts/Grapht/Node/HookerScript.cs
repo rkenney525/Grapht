@@ -78,7 +78,9 @@ namespace Grapht.Node {
         public void DoConnect() {
             // If there was no parent initially, do nothing
             if (listening && connectables.Count > 0) {
-                connectables.Last().AddNewChild(node);
+                TreeNodeScript newParent = connectables.Last();
+                DisableNodeHighlight(newParent.GetComponent<Collider2D>());
+                newParent.AddNewChild(node);
                 connectables.Clear();
             }
             listening = false;
