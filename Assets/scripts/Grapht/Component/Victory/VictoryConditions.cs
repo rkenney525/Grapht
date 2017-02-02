@@ -115,6 +115,32 @@ namespace Grapht.Component.Victory {
         }
 
         /// <summary>
+        /// Return a VictoryCondition that makes sure there are no more than the specific number of branches across all trees
+        /// </summary>
+        /// <param name="num">The max number of branches to allow</param>
+        /// <returns>The specified Victory condition</returns>
+        private static VictoryCondition NoMoreThanTotalBranches(int num) {
+            return new VictoryCondition(
+                string.Format("No more than { 0 } branches across all trees", num),
+                delegate (IList<TreeNodeScript> nodes) {
+                    return nodes.Select(node => node.Root()).Distinct().Count() <= num;
+                }, allBranchFilter);
+        }
+
+        /// <summary>
+        /// Return a VictoryCondition that makes sure there are no less than the specific number of branches across all trees
+        /// </summary>
+        /// <param name="num">The min number of branches to allow</param>
+        /// <returns>The specified Victory condition</returns>
+        private static VictoryCondition NoLessThanTotalBranches(int num) {
+            return new VictoryCondition(
+                string.Format("No fewer than { 0 } branches across all trees", num),
+                delegate (IList<TreeNodeScript> nodes) {
+                    return nodes.Select(node => node.Root()).Distinct().Count() >= num;
+                }, allBranchFilter);
+        }
+
+        /// <summary>
         /// Get the VictoryCondition for the associated JSON node
         /// </summary>
         /// <param name="json">The JSON node to parse</param>
@@ -129,10 +155,14 @@ namespace Grapht.Component.Victory {
                     return SingleTree();
                 case "SameSumBranchPerTree":
                     return SameSumBranchPerTree();
-                case "NoMoreThanThrees":
+                case "NoMoreThanTrees":
                     return NoMoreThanTrees(json["arg"].AsInt);
-                case "NoLessThanThrees":
+                case "NoLessThanTrees":
                     return NoLessThanTrees(json["arg"].AsInt);
+                case "NoMoreThanTotalBranches":
+                    return NoMoreThanTotalBranches(json["arg"].AsInt);
+                case "NoLessThanTotalBranches":
+                    return NoLessThanTotalBranches(json["arg"].AsInt);
                 default:
                     throw new GraphtParsingException();
             }
