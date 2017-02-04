@@ -317,6 +317,104 @@
                     "x": 0,
                     "y": 14
                 },
+                "value": 1,
+                "type": 0,
+                "children": [
+                    {
+                        "value": 9,
+                        "type": 1,
+                        "children": [
+                            {
+                                "value": 8,
+                                "type": 1,
+                                "children": [
+                                    {
+                                        "value": 3,
+                                        "type": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "pos": {
+                    "x": -10,
+                    "y": 5
+                },
+                "value": 4,
+                "type": 0,
+                "children": [
+                    {
+                        "value": 6,
+                        "type": 1
+                    },
+                    {
+                        "value": 1,
+                        "type": 1
+                    },
+                    {
+                        "value": 3,
+                        "type": 1,
+                        "children": [
+                            {
+                                "value": 1,
+                                "type": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "pos": {
+                    "x": 10,
+                    "y": 5
+                },
+                "value": 7,
+                "type": 0,
+                "children": [
+                    {
+                        "value": 3,
+                        "type": 1,
+                        "children": [
+                            {
+                                "value": 2,
+                                "type": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "rules": [
+            {
+                "name": "SameSumBranch"
+            },
+            {
+                "name": "MaxDepth",
+                "arg": 4
+            },
+            {
+                "name": "NoMoreThanTrees",
+                "arg": 3
+            }
+        ],
+        "hints": [
+            {
+                "name": "BranchSize",
+                "arg": 10
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "nodes": [
+            {
+                "pos": {
+                    "x": 0,
+                    "y": 14
+                },
                 "value": 0,
                 "type": 0,
                 "children": [
