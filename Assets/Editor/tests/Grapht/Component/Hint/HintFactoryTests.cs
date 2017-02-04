@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SimpleJSON;
 using Grapht.Exception;
 
 namespace Grapht.Component.Hint {
-    [TestClass]
     public class HintFactoryTests {
-        [TestMethod]
+        [Test]
         public void ParseHintBrancheSize() {
             // Arrange
             JSONNode hintNode = JSONNode.Parse(@"{""name"": ""BranchSize"", ""arg"": 3}");
@@ -17,14 +16,14 @@ namespace Grapht.Component.Hint {
             Assert.AreEqual("Try a branch sum of 3", hintString);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(GraphtParsingException))]
         public void ParseHintUnexpectedValue() {
             // Arrange
             JSONNode hintNode = JSONNode.Parse(@"{""name"": ""lolhax""}");
 
             // Act
-            string hintString = HintFactory.ParseHint(hintNode);
+            HintFactory.ParseHint(hintNode);
         }
     }
 }

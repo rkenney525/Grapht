@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Grapht.Exception;
 using SimpleJSON;
-using Grapht.Node;
 
 namespace Grapht.Component.Victory {
-    [TestClass]
     public class VictoryConditionsTests {
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(GraphtParsingException))]
         public void ParseVictoryConditionUnexpectedValue() {
             // Arrange
