@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Grapht.Arch {
-    [TestClass]
     public class TupleTests {
-        [TestMethod]
+        [Test]
         public void CreateNewTuple() {
             // Arrange
             string elem1 = "BofaDeez";
