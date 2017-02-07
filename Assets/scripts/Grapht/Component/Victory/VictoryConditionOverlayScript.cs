@@ -13,7 +13,7 @@ namespace Grapht.Component.Victory {
         /// <summary>
         /// The VictoryConditionEntry prefab
         /// </summary>
-        public GameObject VictoryConditionEntryRef;
+        private GameObject VictoryConditionEntryRef;
 
         /// <summary>
         /// The height of a particular entry. Easier to hardcode this than try to get at runtime
@@ -30,6 +30,13 @@ namespace Grapht.Component.Victory {
         /// </summary>
         private IDictionary<VictoryCondition, VictoryConditionEntryScript> rules =
             new Dictionary<VictoryCondition, VictoryConditionEntryScript>();
+
+        /// <summary>
+        /// Load external references
+        /// </summary>
+        public override void OnAwake() {
+            VictoryConditionEntryRef = Resources.Load<GameObject>("prefabs/VictoryConditionEntry");
+        }
 
         /// <summary>
         /// Update the overlay to display the current set of victory conditions

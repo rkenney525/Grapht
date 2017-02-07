@@ -28,17 +28,22 @@ namespace Grapht.Component {
         /// <summary>
         /// Reference to the Line prefab
         /// </summary>
-        public GameObject LineRef;
+        private GameObject LineRef;
+
+        /// <summary>
+        /// Load external references
+        /// </summary>
+        public override void OnAwake() {
+            LineRef = Resources.Load<GameObject>("prefabs/Line");
+        }
 
         /// <summary>
         /// Draw a set of horizontal and vertical lines
         /// </summary>
         public void DrawGrid() {
-            // TODO figure out why SELECT doesnt work here
             HorizontalCoordinates().Concat(VerticalCoordinates())
-            .All(lineCoord => {
+            .ForEach(lineCoord => {
                 lines.Add(BuildLine(lineCoord));
-                return true;
             });
         }
 

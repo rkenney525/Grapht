@@ -34,7 +34,7 @@ namespace Grapht.Node {
         /// <summary>
         /// A reference to the Binding prefab
         /// </summary>
-        public GameObject BindingRef;
+        private GameObject BindingRef;
 
         /// <summary>
         /// The parent of this node
@@ -62,6 +62,7 @@ namespace Grapht.Node {
         /// Get the NumericValueScript and other properties when the component is created
         /// </summary>
         public override void OnAwake() {
+            BindingRef = Resources.Load<GameObject>("prefabs/Binding");
             value = GetComponent<NumericValueScript>();
             width = SINGLE_NODE_WIDTH;
             branchTotalDisplay = GetComponentInChildren<ValueDisplayScript>();

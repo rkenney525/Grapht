@@ -20,12 +20,12 @@ namespace Grapht.Component {
         /// <summary>
         /// Reference to the moveable node prefab
         /// </summary>
-        public GameObject MoveableNodeRef;
+        private GameObject MoveableNodeRef;
 
         /// <summary>
         /// Reference to the immoveable node prefab
         /// </summary>
-        public GameObject ImmoveableNodeRef;
+        private GameObject ImmovableNodeRef;
 
         /// <summary>
         /// The Canvas GameObject which contains all nodes
@@ -56,6 +56,8 @@ namespace Grapht.Component {
         /// Load all references/external data on component creation
         /// </summary>
         public override void OnAwake() {
+            MoveableNodeRef = Resources.Load<GameObject>("prefabs/Moveable Node");
+            ImmovableNodeRef = Resources.Load<GameObject>("prefabs/Immovable Node");
             canvas = GameObject.Find(CANVAS_OBJECT_NAME);
             watcher = FindObjectOfType<VictoryWatcherScript>();
             hintButtonScript = FindObjectOfType<HintButtonScript>();
@@ -100,7 +102,7 @@ namespace Grapht.Component {
             return nodes.Select(node => {
                 // Get the prefab
                 GameObject nodePrefab = Instantiate(
-                    (node.NodeType == NodeInfo.Type.IMMOVEABLE) ? ImmoveableNodeRef : MoveableNodeRef);
+                    (node.NodeType == NodeInfo.Type.IMMOVEABLE) ? ImmovableNodeRef : MoveableNodeRef);
 
                 // Add to the canvas
                 nodePrefab.transform.parent = canvas.transform;

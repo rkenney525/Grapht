@@ -10,7 +10,7 @@ namespace Grapht.Component.Hint {
         /// <summary>
         /// The HintEntry prefab
         /// </summary>
-        public GameObject HintEntryRef;
+        private GameObject HintEntryRef;
 
         /// <summary>
         /// The height of a particular entry. Easier to hardcode this than try to get at runtime
@@ -31,6 +31,13 @@ namespace Grapht.Component.Hint {
         /// Whether to display the hints or not
         /// </summary>
         private bool display = false;
+
+        /// <summary>
+        /// Load external references
+        /// </summary>
+        public override void OnAwake() {
+            HintEntryRef = Resources.Load<GameObject>("prefabs/HintEntry");
+        }
 
         /// <summary>
         /// Create displayable hints, hidden by default
