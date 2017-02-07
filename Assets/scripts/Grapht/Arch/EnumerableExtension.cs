@@ -10,10 +10,10 @@ namespace Grapht.Arch {
         /// <summary>
         /// Perform some action on all items in an enumerable.
         /// </summary>
-        /// <typeparam name="T">The type of iteratee</typeparam>
+        /// <typeparam name="TSource">The type of iteratee</typeparam>
         /// <param name="enumerable">The IEnumerable to iterate over</param>
         /// <param name="action">The action to perform on each iteratee</param>
-        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action) {
+        public static void ForEach<TSource>(this IEnumerable<TSource> enumerable, Action<TSource> action) {
             enumerable.All(item => {
                 action.Invoke(item);
                 return true;
