@@ -50,7 +50,7 @@ namespace Grapht.Component {
         private LineRenderer BuildLine(Tuple<Vector2, Vector2> coords) {
             LineRenderer line = Instantiate(LineRef).GetComponent<LineRenderer>();
             line.transform.parent = this.transform;
-            line.SetWidth(LINE_SIZE, LINE_SIZE);
+            line.startWidth = line.endWidth = LINE_SIZE;
             line.SetPosition(0, coords._1);
             line.SetPosition(1, coords._2);
             return line;
