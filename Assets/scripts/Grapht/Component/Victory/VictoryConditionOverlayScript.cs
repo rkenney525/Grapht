@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Linq;
 using Grapht.Node;
+using Grapht.Arch;
 
 namespace Grapht.Component.Victory {
     /// <summary>
     /// Control the placement and display of all rules
     /// </summary>
-    public class VictoryConditionOverlayScript : MonoBehaviour {
+    public class VictoryConditionOverlayScript : UnityComponent {
 
         /// <summary>
         /// The VictoryConditionEntry prefab
@@ -43,7 +42,7 @@ namespace Grapht.Component.Victory {
 
             // Add the new conditions
             int entryNumber = 0;
-            conditions.All(condition => {
+            conditions.ForEach(condition => {
                 // Create the entry
                 Vector2 position = START - new Vector2(0, ENTRY_HEIGHT * entryNumber++);
                 GameObject entryObj = Instantiate(VictoryConditionEntryRef);
@@ -55,7 +54,6 @@ namespace Grapht.Component.Victory {
 
                 // Store it in the dictionary
                 rules.Add(condition, entry);
-                return true;
             });
         }
 
@@ -74,9 +72,8 @@ namespace Grapht.Component.Victory {
         /// Remove display entities and clear the dictionary
         /// </summary>
         private void Clear() {
-            rules.Select(set => set.Value).All(txt => {
-                GameObject.Destroy(txt.gameObject);
-                return true;
+            rules.Select(set => set.Value).ForEach(txt => {
+                Destroy(txt.gameObject);
             });
             rules.Clear();
         }

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Grapht.Arch;
 
 namespace Grapht.Node {
     /// <summary>
     /// The total branch value to be displayed under a node
     /// </summary>
-    public class ValueDisplayScript : MonoBehaviour {
+    public class ValueDisplayScript : UnityComponent {
 
         /// <summary>
         /// The Text field containing the branch value
@@ -16,7 +17,7 @@ namespace Grapht.Node {
         /// <summary>
         /// Get the Text field when this component is created
         /// </summary>
-        void Awake() {
+        public override void OnAwake() {
             text = GetComponentInChildren<Text>();
         }
 

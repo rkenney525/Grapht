@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using Grapht.Arch;
 
 namespace Grapht.Node {
     /// <summary>
@@ -7,7 +7,7 @@ namespace Grapht.Node {
     /// </summary>
     [RequireComponent(typeof(LineRenderer))]
     [RequireComponent(typeof(RelativeJoint2D))]
-    public class Binding : MonoBehaviour {
+    public class Binding : UnityComponent {
         /// <summary>
         /// The line to draw from the parent to the child
         /// </summary>
@@ -52,8 +52,8 @@ namespace Grapht.Node {
         /// Set some properties for the Line Renderer. These are only set once
         /// </summary>
         private void SetUpLine() {
-            this.Line.SetWidth(LINE_WIDTH, LINE_WIDTH);
-            this.Line.SetColors(Color.black, Color.black);
+            Line.startWidth = Line.endWidth = LINE_WIDTH;
+            Line.startColor = Line.endColor = Color.black;
         }
 
 

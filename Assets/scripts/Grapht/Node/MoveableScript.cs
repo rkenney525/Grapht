@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Grapht.Arch;
 using Grapht.Component;
 
 namespace Grapht.Node {
@@ -8,7 +8,7 @@ namespace Grapht.Node {
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(HookerScript))]
-    public class MoveableScript : MonoBehaviour {
+    public class MoveableScript : UnityComponent {
 
         /// <summary>
         /// True if the node is being dragged, false otherwise
@@ -33,7 +33,7 @@ namespace Grapht.Node {
         /// <summary>
         /// Load all internal and external references when this component is created
         /// </summary>
-        void Awake() {
+        public override void OnAwake() {
             this.selected = false;
             this.rigidBody = this.GetComponent<Rigidbody2D>();
             this.hooker = this.GetComponent<HookerScript>();

@@ -9,6 +9,8 @@ namespace Grapht.Arch {
         /// Initialize all external references - essentially the logic you would want in MonoBehavior.Awake, because that's when it will be called. Awake gets called once
         /// every GameObject has initialized.
         /// </summary>
-        public abstract void OnAwake();
+        public virtual void OnAwake() {
+            // Implementation is optional
+        }
     }
 }

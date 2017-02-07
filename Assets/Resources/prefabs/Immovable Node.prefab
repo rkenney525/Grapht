@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5012014}
   - component: {fileID: 11461278}
   - component: {fileID: 6148556}
+  - component: {fileID: 114465846692581712}
   m_Layer: 0
   m_Name: Immovable Node
   m_TagString: Untagged
@@ -328,6 +329,17 @@ Transform:
   m_Father: {fileID: 474906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114465846692581712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f71604735efb04f9d15e6e1f49cc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212561922799343288
 SpriteRenderer:
   m_ObjectHideFlags: 1

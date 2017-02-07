@@ -2,9 +2,10 @@
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using Grapht.Arch;
 
 namespace Grapht.Component.Hint {
-    public class HintButtonScript : MonoBehaviour {
+    public class HintButtonScript : UnityComponent {
 
         /// <summary>
         /// The HintEntry prefab
@@ -56,9 +57,8 @@ namespace Grapht.Component.Hint {
         /// </summary>
         public void ToggleDisplay() {
             display = !display;
-            entries.All(entry => {
+            entries.ForEach(entry => {
                 entry.SetActive(display);
-                return true;
             });
         }
 
@@ -66,9 +66,8 @@ namespace Grapht.Component.Hint {
         /// Destroy all HintEntry objects on screen
         /// </summary>
         private void Clear() {
-            entries.All(hintEntry => {
-                GameObject.Destroy(hintEntry);
-                return true;
+            entries.ForEach(hintEntry => {
+                Destroy(hintEntry);
             });
             display = false;
         }

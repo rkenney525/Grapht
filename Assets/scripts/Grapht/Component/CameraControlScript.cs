@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Controls zooming and panning while in the main game mode
     /// </summary>
-    public class CameraControlScript : MonoBehaviour {
+    public class CameraControlScript : UnityComponent {
         /// <summary>
         /// The change in orthagraphic size per zoom action
         /// </summary>
@@ -30,9 +29,9 @@ namespace Grapht.Component {
         /// <summary>
         /// Load the Camera reference and other properties when this component is created
         /// </summary>
-        void Start() {
-            this.cam = this.GetComponent<Camera>();
-            this.previousMousePosition = Vector3.zero;
+        public override void OnAwake() {
+            cam = GetComponent<Camera>();
+            previousMousePosition = Vector3.zero;
         }
 
         /// <summary>

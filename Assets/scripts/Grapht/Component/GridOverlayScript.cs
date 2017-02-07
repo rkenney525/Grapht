@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Grapht.Arch;
@@ -9,7 +8,7 @@ namespace Grapht.Component {
     /// <summary>
     /// Script responsible for drawing grid squares on the screen
     /// </summary>
-    public class GridOverlayScript : MonoBehaviour {
+    public class GridOverlayScript : UnityComponent {
 
         /// <summary>
         /// The size of each line

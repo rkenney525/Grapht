@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Grapht.Arch;
 
 namespace Grapht.Node {
     /// <summary>
     /// Manages children, parents, and all graph related functions
     /// </summary>
     [RequireComponent(typeof(NumericValueScript))]
-    public class TreeNodeScript : MonoBehaviour {
+    public class TreeNodeScript : UnityComponent {
 
         /// <summary>
         /// The vertical distance bindings should have
@@ -60,10 +61,10 @@ namespace Grapht.Node {
         /// <summary>
         /// Get the NumericValueScript and other properties when the component is created
         /// </summary>
-        void Awake() {
-            this.value = this.GetComponent<NumericValueScript>();
-            this.width = SINGLE_NODE_WIDTH;
-            this.branchTotalDisplay = GetComponentInChildren<ValueDisplayScript>();
+        public override void OnAwake() {
+            value = GetComponent<NumericValueScript>();
+            width = SINGLE_NODE_WIDTH;
+            branchTotalDisplay = GetComponentInChildren<ValueDisplayScript>();
         }
 
         /// <summary>

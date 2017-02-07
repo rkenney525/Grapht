@@ -5,12 +5,13 @@ using Grapht.Config;
 using SimpleJSON;
 using Grapht.Node;
 using Grapht.Component.Hint;
+using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Loads level data from a json file, converts it into C# objects, and adapts the Scene
     /// </summary>
-    public class LevelLoaderScript : MonoBehaviour {
+    public class LevelLoaderScript : UnityComponent {
         /// <summary>
         /// The name of the GameObject that contains the Canvas
         /// </summary>
@@ -54,7 +55,7 @@ namespace Grapht.Component {
         /// <summary>
         /// Load all references/external data on component creation
         /// </summary>
-        void Start() {
+        public override void OnAwake() {
             canvas = GameObject.Find(CANVAS_OBJECT_NAME);
             watcher = FindObjectOfType<VictoryWatcherScript>();
             hintButtonScript = FindObjectOfType<HintButtonScript>();
