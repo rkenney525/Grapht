@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Displays the Splash Screen and then loads the main menu
     /// </summary>
-    public class SplashControlScript : MonoBehaviour {
+    public class SplashControlScript : UnityComponent {
 
         /// <summary>
         /// The time, in milliseconds, to wait before loading the main game

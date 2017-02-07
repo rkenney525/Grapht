@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\Pipeline.cs" />
+    <Compile Include="Assets\Editor\tests\Grapht\Arch\EnumerableExtensionTests.cs" />
     <Compile Include="Assets\Editor\tests\Grapht\Arch\FloatRangeExtensionTests.cs" />
     <Compile Include="Assets\Editor\tests\Grapht\Arch\TupleTests.cs" />
     <Compile Include="Assets\Editor\tests\Grapht\Component\Hint\HintFactoryTests.cs" />

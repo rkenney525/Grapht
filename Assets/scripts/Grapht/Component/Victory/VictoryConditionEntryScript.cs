@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using Grapht.Arch;
 
 namespace Grapht.Component.Victory {
     /// <summary>
     /// Controls a UI entry for a victory condition
     /// </summary>
-    public class VictoryConditionEntryScript : MonoBehaviour {
+    public class VictoryConditionEntryScript : UnityComponent {
 
         /// <summary>
         /// The condition description Text field

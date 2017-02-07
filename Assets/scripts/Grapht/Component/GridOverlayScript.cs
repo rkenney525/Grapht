@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Grapht.Arch;
@@ -9,7 +8,7 @@ namespace Grapht.Component {
     /// <summary>
     /// Script responsible for drawing grid squares on the screen
     /// </summary>
-    public class GridOverlayScript : MonoBehaviour {
+    public class GridOverlayScript : UnityComponent {
 
         /// <summary>
         /// The size of each line
@@ -29,17 +28,22 @@ namespace Grapht.Component {
         /// <summary>
         /// Reference to the Line prefab
         /// </summary>
-        public GameObject LineRef;
+        private GameObject LineRef;
+
+        /// <summary>
+        /// Load external references
+        /// </summary>
+        public override void OnAwake() {
+            LineRef = Resources.Load<GameObject>("prefabs/Line");
+        }
 
         /// <summary>
         /// Draw a set of horizontal and vertical lines
         /// </summary>
         public void DrawGrid() {
-            // TODO figure out why SELECT doesnt work here
             HorizontalCoordinates().Concat(VerticalCoordinates())
-            .All(lineCoord => {
+            .ForEach(lineCoord => {
                 lines.Add(BuildLine(lineCoord));
-                return true;
             });
         }
 
@@ -51,7 +55,7 @@ namespace Grapht.Component {
         private LineRenderer BuildLine(Tuple<Vector2, Vector2> coords) {
             LineRenderer line = Instantiate(LineRef).GetComponent<LineRenderer>();
             line.transform.parent = this.transform;
-            line.SetWidth(LINE_SIZE, LINE_SIZE);
+            line.startWidth = line.endWidth = LINE_SIZE;
             line.SetPosition(0, coords._1);
             line.SetPosition(1, coords._2);
             return line;

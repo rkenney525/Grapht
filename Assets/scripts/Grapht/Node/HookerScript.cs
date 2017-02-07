@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Grapht.Arch;
 
 namespace Grapht.Node {
     /// <summary>
     /// Looks for a parent node to attach to
     /// </summary>
     [RequireComponent(typeof(TreeNodeScript))]
-    public class HookerScript : MonoBehaviour {
+    public class HookerScript : UnityComponent {
 
         /// <summary>
         /// The name of the GameObject that contains the highlight image mask
@@ -32,8 +33,8 @@ namespace Grapht.Node {
         /// <summary>
         /// Load the TreeScriptNode reference and set other properties when this component is created
         /// </summary>
-        void Awake() {
-            node = this.GetComponent<TreeNodeScript>();
+        public override void OnAwake() {
+            node = GetComponent<TreeNodeScript>();
         }
 
         /// <summary>

@@ -85,8 +85,8 @@ namespace Grapht.Component.Victory {
             return new VictoryCondition(
                 "All nodes on a single tree",
                 delegate (IList<TreeNodeScript> nodes) {
-                    return nodes.Select(node => node.Root()).Distinct().Count() == 1;
-                }, allBranchFilter);
+                    return nodes.Distinct().Count() == 1;
+                }, rootFilter);
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace Grapht.Component.Victory {
             return new VictoryCondition(
                 string.Format("No more than {0} trees", num),
                 delegate (IList<TreeNodeScript> nodes) {
-                    return nodes.Select(node => node.Root()).Distinct().Count() <= num;
-                }, allBranchFilter);
+                    return nodes.Distinct().Count() <= num;
+                }, rootFilter);
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace Grapht.Component.Victory {
             return new VictoryCondition(
                 string.Format("No fewer than {0} trees", num),
                 delegate (IList<TreeNodeScript> nodes) {
-                    return nodes.Select(node => node.Root()).Distinct().Count() >= num;
-                }, allBranchFilter);
+                    return nodes.Distinct().Count() >= num;
+                }, rootFilter);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Grapht.Component.Victory {
             return new VictoryCondition(
                 string.Format("No more than {0} branches across all trees", num),
                 delegate (IList<TreeNodeScript> nodes) {
-                    return nodes.Select(node => node.Root()).Distinct().Count() <= num;
+                    return nodes.Count() <= num;
                 }, allBranchFilter);
         }
 
@@ -137,7 +137,7 @@ namespace Grapht.Component.Victory {
             return new VictoryCondition(
                 string.Format("No fewer than {0} branches across all trees", num),
                 delegate (IList<TreeNodeScript> nodes) {
-                    return nodes.Select(node => node.Root()).Distinct().Count() >= num;
+                    return nodes.Count() >= num;
                 }, allBranchFilter);
         }
 

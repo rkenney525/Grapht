@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using Grapht.Component;
+using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Manage interactivity of the game via states
     /// </summary>
-    public class StateManagerScript : MonoBehaviour {
+    public class StateManagerScript : UnityComponent {
 
         /// <summary>
         /// Represents the interactivity state the game is in
@@ -62,7 +61,7 @@ namespace Grapht.Component {
         /// <summary>
         /// Apply the starting state and load needed components
         /// </summary>
-        void Start() {
+        public override void OnAwake() {
             cameraControls = FindObjectOfType<CameraControlScript>();
             menuCanvas = GameObject.Find("Menu").GetComponent<Canvas>();
             menuBackground = GameObject.Find("MenuBackground").GetComponent<SpriteRenderer>();

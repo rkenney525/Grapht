@@ -5,12 +5,13 @@ using Grapht.Config;
 using System.Collections;
 using Grapht.Node;
 using Grapht.Component.Victory;
+using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Checks if the victory conditions for the game have been met, when invoked.
     /// </summary>
-    public class VictoryWatcherScript : MonoBehaviour {
+    public class VictoryWatcherScript : UnityComponent {
 
         /// <summary>
         /// All nodes in the Scene
@@ -40,7 +41,7 @@ namespace Grapht.Component {
         /// <summary>
         /// Load references when the component is created
         /// </summary>
-        void Awake() {
+        public override void OnAwake() {
             stateManager = GameObject.Find("StateManager").GetComponent<StateManagerScript>();
             overlay = GameObject.Find("Rules").GetComponent<VictoryConditionOverlayScript>();
         }

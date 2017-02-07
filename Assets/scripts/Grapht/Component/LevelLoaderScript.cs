@@ -5,12 +5,13 @@ using Grapht.Config;
 using SimpleJSON;
 using Grapht.Node;
 using Grapht.Component.Hint;
+using Grapht.Arch;
 
 namespace Grapht.Component {
     /// <summary>
     /// Loads level data from a json file, converts it into C# objects, and adapts the Scene
     /// </summary>
-    public class LevelLoaderScript : MonoBehaviour {
+    public class LevelLoaderScript : UnityComponent {
         /// <summary>
         /// The name of the GameObject that contains the Canvas
         /// </summary>
@@ -19,12 +20,12 @@ namespace Grapht.Component {
         /// <summary>
         /// Reference to the moveable node prefab
         /// </summary>
-        public GameObject MoveableNodeRef;
+        private GameObject MoveableNodeRef;
 
         /// <summary>
         /// Reference to the immoveable node prefab
         /// </summary>
-        public GameObject ImmoveableNodeRef;
+        private GameObject ImmovableNodeRef;
 
         /// <summary>
         /// The Canvas GameObject which contains all nodes
@@ -54,7 +55,9 @@ namespace Grapht.Component {
         /// <summary>
         /// Load all references/external data on component creation
         /// </summary>
-        void Start() {
+        public override void OnAwake() {
+            MoveableNodeRef = Resources.Load<GameObject>("prefabs/Moveable Node");
+            ImmovableNodeRef = Resources.Load<GameObject>("prefabs/Immovable Node");
             canvas = GameObject.Find(CANVAS_OBJECT_NAME);
             watcher = FindObjectOfType<VictoryWatcherScript>();
             hintButtonScript = FindObjectOfType<HintButtonScript>();
@@ -99,7 +102,7 @@ namespace Grapht.Component {
             return nodes.Select(node => {
                 // Get the prefab
                 GameObject nodePrefab = Instantiate(
-                    (node.NodeType == NodeInfo.Type.IMMOVEABLE) ? ImmoveableNodeRef : MoveableNodeRef);
+                    (node.NodeType == NodeInfo.Type.IMMOVEABLE) ? ImmovableNodeRef : MoveableNodeRef);
 
                 // Add to the canvas
                 nodePrefab.transform.parent = canvas.transform;

@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22443204}
-  - 222: {fileID: 22287960}
-  - 114: {fileID: 11443360}
+  - component: {fileID: 22443204}
+  - component: {fileID: 22287960}
+  - component: {fileID: 11443360}
   m_Layer: 0
   m_Name: Met
   m_TagString: Untagged
@@ -22,10 +22,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22444040}
-  - 114: {fileID: 11482944}
+  - component: {fileID: 22444040}
+  - component: {fileID: 11482944}
+  - component: {fileID: 114691582652826428}
   m_Layer: 0
   m_Name: VictoryConditionEntry
   m_TagString: Untagged
@@ -38,11 +39,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22459218}
-  - 222: {fileID: 22280556}
-  - 114: {fileID: 11474412}
+  - component: {fileID: 22459218}
+  - component: {fileID: 22280556}
+  - component: {fileID: 11474412}
   m_Layer: 0
   m_Name: Description
   m_TagString: Untagged
@@ -151,6 +152,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22444040}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -9, y: 0}
@@ -170,6 +172,7 @@ RectTransform:
   - {fileID: 22443204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -290, y: 280}
@@ -187,6 +190,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22444040}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -165, y: 0}
@@ -203,3 +207,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 129364}
   m_IsPrefabParent: 1
+--- !u!114 &114691582652826428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f71604735efb04f9d15e6e1f49cc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

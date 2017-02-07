@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
+using Grapht.Arch;
 
 namespace Grapht.Node {
     /// <summary>
     /// Captures the numeric value of a single node
     /// </summary>
-    public class NumericValueScript : MonoBehaviour {
+    public class NumericValueScript : UnityComponent {
 
         /// <summary>
         /// The Text field containing the numeric value
@@ -15,7 +15,7 @@ namespace Grapht.Node {
         /// <summary>
         /// Get the Text field when this component is created
         /// </summary>
-        void Awake() {
+        public override void OnAwake() {
             text = GetComponentInChildren<Text>();
         }
 

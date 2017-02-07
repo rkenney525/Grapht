@@ -81,8 +81,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\Grapht\Arch\EnumerableExtension.cs" />
     <Compile Include="Assets\scripts\Grapht\Arch\FloatRangeExtension.cs" />
     <Compile Include="Assets\scripts\Grapht\Arch\Tuple.cs" />
+    <Compile Include="Assets\scripts\Grapht\Arch\UnityComponent.cs" />
+    <Compile Include="Assets\scripts\Grapht\Arch\UnityEntity.cs" />
     <Compile Include="Assets\scripts\Grapht\Arch\ViewProperties.cs" />
     <Compile Include="Assets\scripts\Grapht\Component\CameraControlScript.cs" />
     <Compile Include="Assets\scripts\Grapht\Component\GridOverlayScript.cs" />
