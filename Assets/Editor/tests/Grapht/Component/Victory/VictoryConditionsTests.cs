@@ -20,7 +20,7 @@ namespace Grapht.Component.Victory {
         private IList<TreeNodeScript> sumVariesDepth2Branch2Nodes;
 
         [TestFixtureSetUp]
-        public void SetupClass() {
+        public void CreateNodeLists() {
             // Tree one - sum10Depth3Branch1Nodes
             //    0 --- 5 --- 5
             TreeNodeScript treeOneRoot = CreateTreeNodeScript();

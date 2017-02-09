@@ -5,7 +5,7 @@ using Grapht.Exception;
 namespace Grapht.Component.Hint {
     public class HintFactoryTests {
         [Test]
-        public void ParseHintBrancheSize() {
+        public void ParseHintBranchSize() {
             // Arrange
             JSONNode hintNode = JSONNode.Parse(@"{""name"": ""BranchSize"", ""arg"": 3}");
 
