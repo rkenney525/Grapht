@@ -49,8 +49,8 @@ namespace Grapht.Component.Victory {
             GetComponent<RectTransform>().anchoredPosition = position;
 
             // Load the references
-            description = transform.FindChild("Description").GetComponent<Text>();
-            met = transform.FindChild("Met").GetComponent<Text>();
+            description = transform.Find("Description").GetComponent<Text>();
+            met = transform.Find("Met").GetComponent<Text>();
 
             // Set the initial state
             description.text = display;

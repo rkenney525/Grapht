@@ -12,13 +12,12 @@ namespace Grapht.Component.Victory {
         private static GameObject NodeRef = Resources.Load<GameObject>("prefabs/Moveable Node");
 
         [Test]
-        [ExpectedException(typeof(GraphtParsingException))]
         public void ParseVictoryConditionUnexpectedValue() {
             // Arrange
             JSONNode hintNode = JSONNode.Parse(@"{""name"": ""lolololhax""}");
 
             // Act
-            VictoryConditions.ParseVictoryCondition(hintNode);
+            Assert.Throws<GraphtParsingException>(() => VictoryConditions.ParseVictoryCondition(hintNode));
         }
 
         // TODO finish writing tests, need to address MonoBehavior mocking
