@@ -17,13 +17,12 @@ namespace Grapht.Component.Hint {
         }
 
         [Test]
-        [ExpectedException(typeof(GraphtParsingException))]
         public void ParseHintUnexpectedValue() {
             // Arrange
             JSONNode hintNode = JSONNode.Parse(@"{""name"": ""lolhax""}");
 
             // Act
-            HintFactory.ParseHint(hintNode);
+            Assert.Throws<GraphtParsingException>(() => HintFactory.ParseHint(hintNode));
         }
     }
 }
